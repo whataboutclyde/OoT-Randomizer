@@ -1,4 +1,4 @@
 #include <stdint.h>
 #include "color.h"
 
-void update_heart_colors();
+void update_hud_colors();
