@@ -134,8 +134,8 @@
           ]
         },
         {
-          "name": "open_section",
-          "text": "Open",
+          "name": "various_section",
+          "text": "Various",
           "row_span": 9,
           "settings": [
             "open_forest",
@@ -144,6 +144,9 @@
             "open_fountain",
             "gerudo_fortress",
             "bridge",
+            "triforce_hunt",
+            "bombchus_in_logic",            
+            "one_item_per_dungeon",
             "trials_random",
             "trials"
           ]
@@ -163,9 +166,6 @@
             "owl_drops",
             "warp_songs",
             "spawn_positions",
-            "triforce_hunt",
-            "bombchus_in_logic",            
-            "one_item_per_dungeon",
             "mq_dungeons_random",
             "mq_dungeons"
           ]

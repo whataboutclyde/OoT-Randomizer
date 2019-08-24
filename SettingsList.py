@@ -1209,7 +1209,7 @@ setting_infos = [
         default        = False,
         disable        = {
             True : {
-                'sections' : ['open_section', 'world_section', 'shuffle_section', 'shuffle_dungeon_section'],
+                'sections' : ['various_section', 'world_section', 'shuffle_section', 'shuffle_dungeon_section'],
             }
         },
         shared         = True,
