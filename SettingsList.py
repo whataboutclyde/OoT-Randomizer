@@ -1322,7 +1322,7 @@ setting_infos = [
             'stones':	  'All Spiritual Stones',
             'medallions': 'All Medallions',
             'dungeons':   'All Dungeons',
-            'tokens':     '100 Gold Skulltula Tokens'
+            'tokens':     '100 Gold Skulltula Tokens',
         },
         gui_tooltip    = '''\
             'Always Open': Rainbow Bridge is always present.
@@ -1344,6 +1344,25 @@ setting_infos = [
             ],
         },
     ),
+    Checkbutton(
+        name           = 'triforce_hunt',
+        gui_text       = 'Triforce Hunt',
+        gui_tooltip    = '''\
+            Pieces of the Triforce have been scattered around the world. 
+            Find 20 of them to beat the game. In multiworld, 20 per world
+            must be collectively obtained.
+
+            Game is saved on completion, and Ganon's Castle key is given
+            if beating the game again is desired.
+        ''',
+        shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
+        disable        = {
+            True  : {'settings' : ['shuffle_ganon_bosskey']},
+        },
+    ),    
     Combobox(
         name           = 'logic_rules',
         gui_text       = 'Logic Rules',
@@ -2029,6 +2048,7 @@ setting_infos = [
         name           = 'shuffle_ganon_bosskey',
         gui_text       = 'Ganon\'s Boss Key',
         default        = 'dungeon',
+        disabled_default = 'triforce',
         choices        = {
             'remove':          "Remove",
             'dungeon':         "Dungeon Only",
@@ -2060,7 +2080,6 @@ setting_infos = [
             'On LACS: Medallions': All 6 Medallions.
             'On LACS: Stones': All 3 Spiritual Stones.
             'On LACS: Dungeons': All Spiritual Stones & Medallions.
-            
         ''',
         shared         = True,
         gui_params     = {

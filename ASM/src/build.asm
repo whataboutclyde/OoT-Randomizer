@@ -64,6 +64,7 @@ RANDO_CONTEXT:
 .include "bunny_hood.asm"
 .include "magic_color.asm"
 .include "debug.asm"
+.include "extended_objects.asm"
 .include "cow.asm"
 .include "lake_hylia.asm"
 .include "timers.asm"
@@ -78,6 +79,8 @@ FONT_TEXTURE:
 .incbin("../resources/font.bin")
 DPAD_TEXTURE:
 .incbin("../resources/dpad.bin")
+TRIFORCE_ICON_TEXTURE:
+.incbin("../resources/triforce_sprite.bin")
 .endarea
 
 .close

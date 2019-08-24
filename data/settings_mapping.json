@@ -155,6 +155,7 @@
           "settings": [
             "starting_age",
             "entrance_shuffle",
+            "triforce_hunt",
             "bombchus_in_logic",            
             "one_item_per_dungeon",
             "mq_dungeons_random",

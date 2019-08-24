@@ -34,6 +34,8 @@ class World(object):
         self.scrub_prices = {}
         self.maximum_wallets = 0
         self.light_arrow_location = None
+        self.triforce_count = 0
+        self.triforce_goal = 20 * settings.world_count
 
         self.parser = Rule_AST_Transformer(self)
         self.event_items = set()
@@ -111,6 +113,10 @@ class World(object):
         new_world.can_take_damage = self.can_take_damage
         new_world.shop_prices = copy.copy(self.shop_prices)
         new_world.maximum_wallets = self.maximum_wallets
+        new_world.triforce_goal = self.triforce_goal
+        new_world.triforce_count = self.triforce_count
+
+        new_world.id = self.id
         new_world.distribution = self.distribution
 
         new_world.regions = [region.copy(new_world) for region in self.regions]
