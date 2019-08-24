@@ -886,7 +886,7 @@
                             (damage_multiplier != 'ohko' or has_fairy or can_use(Nayrus_Love)))))",
             "Kakariko Village Backyard": "is_adult or (is_child and at_day)",
             "Graveyard": "True",
-            "Kakariko Village Behind Gate": "is_adult or 'Kakariko Village Gate Open'"
+            "Kakariko Village Behind Gate": "is_adult or open_kakariko or 'Kakariko Village Gate Open'"
         }
     },
     {
@@ -1146,7 +1146,7 @@
         "scene": "Kakariko Village",
         "exits": {
             "Kakariko Village": "
-                is_adult or logic_visible_collisions or 'Kakariko Village Gate Open'",
+                is_adult or logic_visible_collisions or open_kakariko or 'Kakariko Village Gate Open'",
             "Death Mountain": "True"
         }
     },
