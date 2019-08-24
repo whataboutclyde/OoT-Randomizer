@@ -1325,11 +1325,70 @@ skip_GS_BGS_text:
     jal     grotto_entrance
     lui     at, 1
 
-; Replaces: addu    at, at, a3
+; Replaces: lui     at, 0x0001
+;           addu    at, at, a3
 ;           sh      t6, 0x1E1A(at)
-.orga 0xBD4C58
+;           lh      v0, 0x1E1A(v1)
+;           addiu   at, zero, 0x7FFF
+;           addiu   t7, zero, 0x0002
+.orga 0xBD4C54
+    lui     at, 0x0001
     jal     scene_exit_hook
     addu    at, at, a3
+    bnez    v0, @skip_other_entrance_routines
+    addiu   at, zero, 0x7FFF
+    lh      v0, 0x1E1A(v1)
+
+.orga 0xBD4D4C
+@skip_other_entrance_routines:
+
+; Replaces: lui     v1, 0x8012
+;           lw      v1, -0x5A28(v1)
+.orga 0xB11000
+    jal     override_special_grotto_entrances_1
+    lui     v1, 0x8012
+
+; Replaces: sw      t4, 0x000C(s0)
+;           sw      t5, 0x0010(s0)
+.orga 0xB113D0
+    jal     override_special_grotto_entrances_2
+    sw      t4, 0x000C(s0)
+
+; Replaces: sw      v0, 0x000C(s0)
+;           sw      t9, 0x0010(s0)
+.orga 0xB11608
+    jal     override_special_grotto_entrances_3
+    sw      v0, 0x000C(s0)
+
+; Replaces: sw      t3, 0x0010(s0)
+;           sw      v0, 0x000C(s0)
+.orga 0xB117F4
+    jal     override_special_grotto_entrances_4
+    sw      t3, 0x0010(s0)
+
+; Replaces: sw      t3, 0x0010(s0)
+;           sw      v0, 0x000C(s0)
+.orga 0xB11984
+    jal     override_special_grotto_entrances_4
+    sw      t3, 0x0010(s0)
+
+; Replaces: lui     v0, 0x8012
+;           addiu   v0, v0, 0xA5D0
+;           lw      t6, 0x0010(v0)
+;           lui     t0, 0x8010
+;           beql    t6, zero, 0xAF869C
+;           lw      t8, 0x0004(v0)
+;           lw      t7, 0x0004(v0)
+;           lui     v0, 0x0001
+.orga 0xAF863C
+    addiu   sp, sp, -0x18
+    sw      ra, 0x04(sp)
+    jal     override_special_grotto_entrances_5
+    nop
+    lw      ra, 0x04(sp)
+    addiu   sp, sp, 0x18
+    beq     t6, zero, 0xAF869C
+    lui     v0, 0x0001
 
 ; ==================================================================================================
 ; Getting Caught by Gerudo NPCs in ER
