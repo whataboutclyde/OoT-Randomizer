@@ -2,6 +2,23 @@
 
 This is a randomizer for _The Legend of Zelda: Ocarina of Time_ for the Nintendo 64.
 
+**WARNING:** This branch is a modified version of the randomizer. It is **not** officially supported and may be **very unstable**.
+Please refrain from asking questions and from reporting issues in the main Randomizer Discord when using this branch.
+Instead, you can open an issue on this fork [here](https://github.com/Roman971/OoT-Randomizer/issues) or contact me directly on discord (Roman#7295) for any help, report or request.
+
+Differences between this branch and the main Dev branch (on [Testrunner's Fork](https://github.com/TestRunnerSRL/OoT-Randomizer/tree/Dev)):
+* "Add Open Kakariko Gate" option to have the gate to Death Mountain open from the start
+* "Skip First Dampe Race" option to make it possible to win both rewards at once if you finish under a minute the first time
+* "Triforce Hunt" option from [KevinPal aka shadeslayer's Triforce Hunt Branch](https://github.com/KevinPal/OoT-Randomizer/tree/triforce)
+* New cosmetic options to configure HUD Button colors from [Cuphat's HUD Colors   Branch](https://github.com/Cuphat/OoT-Randomizer/tree/hud_colors)
+* "Entrance Shuffle" (aka ER) is changed into a set of more advanced and customizable options including mixing entrance pools, decoupling entrances and randomizing overworld spawns or warp songs.
+* "...???" textboxes at some of the Great Fairy entrances are fixed to not stay after the entrance is no longer blocked off.
+* Picking up Gold Skulltula Tokens in non-Tokensanity displays a self-closing textbox which no longer freezes the player.
+* The HUD Rupee Icon color changes based on your current wallet upgrade.
+* Some of the GUI styling is improved for consistency and a better user experience.
+
+## Index
+
 * [Installation](#installation)
 * [General Description](#general-description)
   * [Getting Stuck](#getting-stuck)
@@ -13,13 +30,8 @@ This is a randomizer for _The Legend of Zelda: Ocarina of Time_ for the Nintendo
 
 ## Installation
 
-It is strongly suggested users use the web generator from here:
-
-https://ootrandomizer.com
-
-If you wish to run the script raw, clone this repository and either run ```Gui.py``` for a
-graphical interface or ```OoTRandomizer.py``` for the command line version. They both require Python 3.6+. This will be fully featured,
-but the seeds you generate will have different random factors than the bundled release.
+To run this program, clone or download this repository and either run ```Gui.py``` for a graphical interface or ```OoTRandomizer.py``` for the command line version. 
+They both require Python 3.6+.
 
 This randomizer requires The Legend of Zelda: Ocarina of Time version ```1.0 NTSC-US```. This randomizer includes an in-built decompressor, but if
 the user wishes a pre-decompressed ROM may be supplied as input. Please be sure your input ROM filename is either a .n64 or .z64 file. For users
