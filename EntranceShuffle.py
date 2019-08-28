@@ -681,9 +681,6 @@ def entrance_unreachable_as(entrance, age, already_checked=None):
         return age == 'adult'
     elif entrance.name == 'Adult Spawn -> Temple of Time':
         return age == 'child'
-    elif entrance.parent_region.name == 'Root Exits':
-        # If we ended up at the root and it's not of the above cases, we consider that this may be an assumption target so we fail
-        return False
 
     # Other entrances such as Interior, Dungeon or Grotto are fine unless they have a parent which is one of the above cases
     # Recursively check parent entrances to verify that they are also not reachable as the wrong age
