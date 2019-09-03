@@ -1324,7 +1324,7 @@ setting_infos = [
             'stones':	  'All Spiritual Stones',
             'medallions': 'All Medallions',
             'dungeons':   'All Dungeons',
-            'tokens':     '100 Gold Skulltula Tokens',
+            'tokens':     'Gold Skulltula Tokens'
         },
         gui_tooltip    = '''\
             'Always Open': Rainbow Bridge is always present.
@@ -1332,9 +1332,16 @@ setting_infos = [
             'All Spiritual Stones': All 3 Spiritual Stones.
             'All Medallions': All 6 Medallions.
             'All Dungeons': All Medallions and Spiritual Stones.
-            '100 Gold Skulltula Tokens': All 100 Gold Skulltula Tokens.
+            'Gold Skulltula Tokens': Gold Skulltula Tokens.
         ''',
         shared         = True,
+        disable={
+            'open':       {'settings': ['bridge_tokens']},
+            'vanilla':    {'settings': ['bridge_tokens']},
+            'stones':     {'settings': ['bridge_tokens']},
+            'medallions': {'settings': ['bridge_tokens']},
+            'dungeons':   {'settings': ['bridge_tokens']},
+        },
         gui_params     = {
             'randomize_key': 'randomize_settings',
             'distribution':  [
@@ -1344,6 +1351,21 @@ setting_infos = [
                 ('medallions', 1),
                 ('dungeons',   1),
             ],
+        },
+    ),
+    Scale(
+        name           = 'bridge_tokens',
+        gui_text       = "Skulltulas Required for Bridge",
+        default        = 100,
+        min            = 1,
+        max            = 100,
+        gui_tooltip    = '''\
+            Select the amount of Gold Skulltula Tokens required to spawn the rainbow bridge.
+        ''',
+        shared         = True,
+        disabled_default = 0,
+        gui_params     = {
+            "hide_when_disabled": True,
         },
     ),
     Checkbutton(
@@ -1414,9 +1436,6 @@ setting_infos = [
 
             When disabled, only required items and locations
             to beat the game will be guaranteed reachable.
-
-            Even when enabled, some locations may still be able
-            to hold the keys needed to reach them.
         ''',
         default        = True,
         shared         = True
@@ -1450,18 +1469,20 @@ setting_infos = [
         name           = 'one_item_per_dungeon',
         gui_text       = 'Dungeons Have One Major Item',
         gui_tooltip    = '''\
-            Dungeons have exactly one major
-            item. This naturally makes each
-            dungeon similar in value instead
-            of valued based on chest count.
+            Dungeons have exactly one major item. 
+            This naturally makes each dungeon similar in 
+            value instead of valued based on chest count.
 
-            Spirit Temple Colossus hands count
-            as part of the dungeon. Spirit
-            Temple has TWO items to match
-            vanilla distribution.
+            Spirit Temple Colossus hands count as part 
+            of the dungeon. Spirit Temple has TWO items 
+            to match vanilla distribution.
 
-            Dungeon items and GS Tokens do
-            not count as major items.
+            Keys only count as major items if they are 
+            shuffled everywhere (ie. in keysanity).
+            GS Tokens only count as major items if the 
+            bridge condition is set to "All GS Tokens".
+            Bombchus only count as major items if they
+            are considered in logic.
         ''',
         shared         = True,
         gui_params     = {
@@ -2017,9 +2038,10 @@ setting_infos = [
         gui_text       = 'Tokensanity',
         default        = 'off',
         choices        = {
-            'off':      'Off',
-            'dungeons': 'Dungeons Only',
-            'all':      'All Tokens',
+            'off':       'Off',
+            'dungeons':  'Dungeons Only',
+            'overworld': 'Overworld Only',
+            'all':       'All Tokens',
             },
         gui_tooltip    = '''\
             Token reward from Gold Skulltulas are
@@ -2030,6 +2052,10 @@ setting_infos = [
             dungeons, increasing the value of
             most dungeons and making internal
             dungeon exploration more diverse.
+
+            'Overworld Only': This only shuffles
+            the GS locations that are outside
+            of dungeons.
 
             'All Tokens': Effectively adds 100
             new locations for items to appear.
@@ -2158,10 +2184,10 @@ setting_infos = [
         default        = 'dungeon',
         disabled_default = 'triforce',
         choices        = {
-            'remove':          "Remove",
-            'dungeon':         "Dungeon Only",
+            'remove':          "Remove (Keysy)",
             'vanilla':         "Vanilla Location",
-            'keysanity':       "Anywhere",
+            'dungeon':         "Dungeon Only",
+            'keysanity':       "Anywhere (Keysanity)",
             'lacs_vanilla':    "On LACS: Vanilla",
             'lacs_medallions': "On LACS: Medallions",
             'lacs_stones':     "On LACS: Stones",
@@ -2277,9 +2303,8 @@ setting_infos = [
         choices        = [location.name for location in LocationIterator(lambda loc: loc.filter_tags is not None)],
         default        = [],
         gui_tooltip    = '''
-            Prevent locations from being required. Major
-            items can still appear there, however they
-            will never be required to beat the game.
+            Prevent locations from being required.
+            Only junk items will appear at those locations.
 
             Most dungeon locations have a MQ alternative.
             If the location does not exist because of MQ
