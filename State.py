@@ -392,7 +392,7 @@ class State(object):
         if self.world.bridge == 'dungeons':
             return self.has_all_stones() and self.has_all_medallions()
         if self.world.bridge == 'tokens':
-            return self.has('Gold Skulltula Token', 100)
+            return self.has('Gold Skulltula Token', self.world.bridge_tokens)
         raise Exception ('Unknown Rainbow Bridge Logic')
 
 
