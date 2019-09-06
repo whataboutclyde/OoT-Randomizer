@@ -243,6 +243,17 @@ export class GeneratorComponent implements OnInit {
           this.dialogService.open(DialogWindow, {
             autoFocus: true, closeOnBackdropClick: true, closeOnEsc: true, hasBackdrop: true, hasScroll: false, context: { dialogHeader: "Error", dialogMessage: "You may only generate one seed per minute to prevent spam!" }
           });
+        } 
+        else if (err.hasOwnProperty('errorRomInPlando')) {
+          let plandoDisclaimer = "Your OoT ROM doesn't belong in the plandomizer setting. This entirely optional setting is used to plan out seeds before generation by manipulating spoiler log files. If you want to generate a normal seed, click YES.";
+          this.dialogService.open(ConfirmationWindow, {
+            autoFocus: true, closeOnBackdropClick: true, closeOnEsc: true, hasBackdrop: true, hasScroll: false, context: { dialogHeader: "Your rom doesn't belong here!", dialogMessage: plandoDisclaimer }
+          }).onClose.subscribe(confirmed => {
+            if (confirmed) {
+              this.global.generator_settingsMap["distribution_file"] = null;
+              this.generateSeed(fromPatchFile, webRaceSeed);
+            }
+          });
         }
         else {
           this.dialogService.open(DialogWindow, {
@@ -800,6 +811,20 @@ export class GeneratorComponent implements OnInit {
 
   getVariableType(variable: any) {
     return typeof (variable);
+  }
+
+  getNextVisibleSetting(settings: any, startingIndex: number) {
+
+    if (settings.length > startingIndex) {
+      for (let i = startingIndex; i < settings.length; i++) {
+        let setting = settings[i];
+
+        if (this.global.generator_settingsVisibilityMap[setting.name] || !setting.hide_when_disabled)
+          return setting;
+      }
+    }
+
+    return null;
   }
 
   checkVisibility(newValue: any, setting: any, option: any = null, refColorPicker: HTMLInputElement = null, disableOnly: boolean = false, noValueChange: boolean = false) {
