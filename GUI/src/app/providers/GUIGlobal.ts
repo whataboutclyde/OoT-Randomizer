@@ -514,7 +514,7 @@ export class GUIGlobal {
 
       var event = await post.send(window, 'getCurrentSourceVersion');
 
-      var res = event.data;
+      var res: string = event.data;
       var result = { hasUpdate: false, currentVersion: "", latestVersion: "" };
 
       if (res && res.length > 0) {
