@@ -246,8 +246,7 @@ class State(object):
 
 
     def guarantee_trade_path(self, age=None):
-        if self.world.shuffle_interior_entrances or self.world.shuffle_overworld_entrances:
-            # Timers are disabled and items don't revert on save warp in those ER settings
+        if self.world.disable_trade_revert:
             return True
         else:
             return (
