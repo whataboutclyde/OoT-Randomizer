@@ -802,13 +802,6 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
                 copy_entrance_record(blue_out_data + 2, new_entrance["blue_warp"] + 2, 2)
                 copy_entrance_record(replaced_entrance["index"], new_entrance["blue_warp"], 2)
 
-    # Set grotto entrances indexes, computed from their unique grotto IDs and their attributed entrance ranges (0x10XX and 0x20XX)
-    for entrance in world.get_shuffled_entrances(type='Grotto'):
-        if entrance.primary:
-            entrance.data['index'] = 0x1000 + entrance.data['grotto_id']
-        else:
-            entrance.data['index'] = 0x2000 + entrance.data['grotto_id']
-
     exit_table = generate_exit_lookup_table()
     
     if world.entrance_shuffle:

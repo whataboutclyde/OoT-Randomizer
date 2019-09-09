@@ -13,20 +13,21 @@ from Hints import get_hint_area
 
 
 def set_all_entrances_data(world):
-    for type, forward_entrance, *return_entrance in entrance_shuffle_table:
-        forward_entrance = set_entrance_data(world, forward_entrance[0], forward_entrance[1], type)
+    for type, forward_entry, *return_entry in entrance_shuffle_table:
+        forward_entrance = world.get_entrance(forward_entry[0]) 
+        forward_entrance.data = forward_entry[1]
+        forward_entrance.type = type
         forward_entrance.primary = True
-        if return_entrance:
-            return_entrance = return_entrance[0]
-            return_entrance = set_entrance_data(world, return_entrance[0], return_entrance[1], type)
+        if type == 'Grotto':
+            forward_entrance.data['index'] = 0x1000 + forward_entrance.data['grotto_id']
+        if return_entry:
+            return_entry = return_entry[0]
+            return_entrance = world.get_entrance(return_entry[0])
+            return_entrance.data = return_entry[1]
+            return_entrance.type = type
             forward_entrance.bind_two_way(return_entrance)
-
-
-def set_entrance_data(world, name, data, type):
-    entrance = world.get_entrance(name)
-    entrance.type = type
-    entrance.data = data
-    return entrance
+            if type == 'Grotto':
+                return_entrance.data['index'] = 0x2000 + return_entrance.data['grotto_id']
 
 
 def assume_entrance_pool(entrance_pool):
