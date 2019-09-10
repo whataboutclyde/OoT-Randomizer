@@ -19,7 +19,8 @@
             "create_spoiler",
             "create_cosmetics_log",
             "compress_rom",
-            "open_output_dir"
+            "open_output_dir",
+            "open_python_dir"
           ]
         },
         {
@@ -55,16 +56,16 @@
           "col_span": 4,
           "row_span": [1,1,1],
           "settings": [
+            "enable_distribution_file",
+            "distribution_file",
+            "create_spoiler",
+            "web_output_type",
             "rom",
             "web_wad_file",
             "web_common_key_file",
             "web_common_key_string",
             "web_wad_channel_id",
-            "web_wad_channel_title",
-            "enable_distribution_file",           
-            "distribution_file",
-            "create_spoiler",
-            "web_output_type"
+            "web_wad_channel_title"
           ]
         },
         {
@@ -100,13 +101,13 @@
           "col_span": 4,
           "row_span": [1,1,1],
           "settings": [
+            "web_output_type",
             "rom",
             "web_wad_file",
             "web_common_key_file",
             "web_common_key_string",
             "web_wad_channel_id",
-            "web_wad_channel_title",
-            "web_output_type"
+            "web_wad_channel_title"
           ]
         },
         {
@@ -409,6 +410,53 @@
           "settings": [
             "sfx_navi_overworld",
             "sfx_navi_enemy"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "footer_tab_electron",
+      "text": "",
+      "exclude_from_web": true,
+      "footer": true,
+      "sections": [
+        {
+          "name": "seed_section",
+          "text": "",
+          "settings": [
+            "generate_from_file"
+          ]
+        },
+        {
+          "name": "file_section",
+          "text": "",
+          "settings": [
+            "patch_file",
+            "repatch_cosmetics"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "footer_tab_web",
+      "text": "",
+      "exclude_from_electron": true,
+      "footer": true,
+      "sections": [
+        {
+          "name": "seed_section",
+          "text": "",
+          "settings": [
+            "generate_from_file"
+          ]
+        },
+        {
+          "name": "file_section",
+          "text": "",
+          "settings": [
+            "patch_file",
+            "repatch_cosmetics",
+            "web_persist_in_cache"
           ]
         }
       ]
