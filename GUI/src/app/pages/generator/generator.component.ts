@@ -119,19 +119,6 @@ export class GeneratorComponent implements OnInit {
     //Electron only: Ensure settings string is up-to-date on app launch
     if (this.global.getGlobalVar('electronAvailable'))
       this.getSettingsString();
-
-    //Remove pace and global spinner element if it exists (to prevent it from ever coming up again in the same session) 
-    let pace = (<any>document).querySelector(".pace");
-
-    if (pace) {
-      pace.parentNode.removeChild(pace);
-    }
-
-    let globalSpinner = (<any>document).querySelector("#nb-global-spinner");
-
-    if (globalSpinner) {
-      globalSpinner.parentNode.removeChild(globalSpinner);
-    }
   }
 
   runEventListeners() {
@@ -264,13 +251,14 @@ export class GeneratorComponent implements OnInit {
             autoFocus: true, closeOnBackdropClick: true, closeOnEsc: true, hasBackdrop: true, hasScroll: false, context: { dialogHeader: "Error", dialogMessage: "You may only generate one seed per minute to prevent spam!" }
           });
         } 
-        else if (err.hasOwnProperty('errorRomInPlando')) {
-          let plandoDisclaimer = "Your OoT ROM doesn't belong in the plandomizer setting. This entirely optional setting is used to plan out seeds before generation by manipulating spoiler log files. If you want to generate a normal seed, click YES.";
+        else if (err.hasOwnProperty('error_rom_in_plando')) {
+
           this.dialogService.open(ConfirmationWindow, {
-            autoFocus: true, closeOnBackdropClick: true, closeOnEsc: true, hasBackdrop: true, hasScroll: false, context: { dialogHeader: "Your rom doesn't belong here!", dialogMessage: plandoDisclaimer }
+            autoFocus: true, closeOnBackdropClick: true, closeOnEsc: true, hasBackdrop: true, hasScroll: false, context: { dialogHeader: "Your ROM doesn't belong here!", dialogMessage: err.error_rom_in_plando }
           }).onClose.subscribe(confirmed => {
             if (confirmed) {
-              this.global.generator_settingsMap["distribution_file"] = null;
+              this.global.generator_settingsMap["enable_distribution_file"] = false;
+              this.global.generator_settingsMap["distribution_file"] = "";
               this.generateSeed(fromPatchFile, webRaceSeed);
             }
           });

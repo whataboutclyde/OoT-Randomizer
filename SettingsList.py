@@ -1287,7 +1287,8 @@ setting_infos = [
         default        = False,
         disable        = {
             True : {
-                'sections' : ['various_section', 'world_section', 'shuffle_section', 'shuffle_dungeon_section'],
+                'sections' : ['various_section', 'shuffle_section', 'shuffle_dungeon_section'],
+                'settings': ['starting_age', 'shuffle_interior_entrances', 'shuffle_grotto_entrances', 'shuffle_dungeon_entrances', 'shuffle_overworld_entrances', 'mix_entrance_pools', 'decouple_entrances', 'owl_drops', 'warp_songs', 'spawn_positions'],
             }
         },
         shared         = True,
@@ -1295,7 +1296,7 @@ setting_infos = [
     Combobox(
         name           = 'open_forest',
         gui_text       = 'Forest',
-        default        = 'open',
+        default        = 'closed',
         choices        = {
             'open':        'Open Forest',
             'closed_deku': 'Closed Deku',
@@ -1532,7 +1533,7 @@ setting_infos = [
             and the Bazaar. Bombchu refills cannot
             be bought until Bombchus have been obtained.
         ''',
-        default        = True,
+        default        = False,
         shared         = True,
         gui_params     = {
             'randomize_key': 'randomize_settings',
@@ -1790,7 +1791,7 @@ setting_infos = [
             This will require finding an Ocarina before being able
             to play songs.
         ''',
-        default        = True,
+        default        = False,
         shared         = True,
         gui_params     = {
             'randomize_key': 'randomize_settings',
@@ -1839,7 +1840,7 @@ setting_infos = [
             and any location can contain a song. Otherwise, songs
             are only shuffled among themselves.
         ''',
-        default        = True,
+        default        = False,
         shared         = True,
         gui_params     = {
             'randomize_key': 'randomize_settings',
@@ -2334,13 +2335,7 @@ setting_infos = [
         shared         = True,
         disable        = {
             True : {'settings' : ['mq_dungeons']}
-        },        
-        gui_params     = {
-            'randomize_key': 'randomize_settings',
-            'distribution': [
-                (True, 1),
-            ],
-        }
+        },
     ),
     Scale(
         name           = 'mq_dungeons',
@@ -2362,9 +2357,6 @@ setting_infos = [
             Master Quest redesigns.
             ''',
         shared         = True,
-        gui_params     = {
-            'randomize_key': 'randomize_settings',
-        },
     ),
     Setting_Info(
         name           = 'disabled_locations', 
@@ -2496,11 +2488,12 @@ setting_infos = [
             be very direct if this option is enabled.
         ''',
         shared         = True,
+        default        = True,
     ),
     Combobox(
         name           = 'hints',
         gui_text       = 'Gossip Stones',
-        default        = 'agony',
+        default        = 'always',
         choices        = {
             'none':   'No Hints',
             'mask':   'Hints; Need Mask of Truth',
