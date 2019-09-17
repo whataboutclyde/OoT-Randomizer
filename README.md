@@ -12,6 +12,7 @@ Differences between this branch and the main Dev branch (on [Testrunner's Fork](
 * New cosmetic options to configure HUD Button colors from [Cuphat's HUD Colors   Branch](https://github.com/Cuphat/OoT-Randomizer/tree/hud_colors)
 * "Entrance Shuffle" (aka ER) is changed into a set of more advanced and customizable options including mixing entrance pools, decoupling entrances and randomizing overworld spawns or warp songs.
 * Picking up Gold Skulltula Tokens in non-Tokensanity displays a self-closing textbox which no longer freezes the player.
+* "Open Zora's Fountain" is changed to a dropdown with an intermediate option to only move King Zora from the start in the Adult era.
 
 ## Index
 
