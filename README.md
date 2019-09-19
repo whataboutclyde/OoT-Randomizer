@@ -7,9 +7,10 @@ Please refrain from asking questions and from reporting issues in the main Rando
 Instead, you can open an issue on this fork [here](https://github.com/Roman971/OoT-Randomizer/issues) or contact me directly on discord (Roman#7295) for any help, report or request.
 
 Differences between this branch and the main Dev branch (on [Testrunner's Fork](https://github.com/TestRunnerSRL/OoT-Randomizer/tree/Dev)):
+* Various GUI tweaks and improvements along with setting tooltip/option changes
 * "Add Open Kakariko Gate" option to have the gate to Death Mountain open from the start
 * "Triforce Hunt" option from [KevinPal aka shadeslayer's Triforce Hunt Branch](https://github.com/KevinPal/OoT-Randomizer/tree/triforce)
-* New cosmetic options to configure HUD Button colors from [Cuphat's HUD Colors   Branch](https://github.com/Cuphat/OoT-Randomizer/tree/hud_colors)
+* New cosmetic options to configure HUD Button colors from [Cuphat's HUD Colors Branch](https://github.com/Cuphat/OoT-Randomizer/tree/hud_colors)
 * "Entrance Shuffle" (aka ER) is changed into a set of more advanced and customizable options including mixing entrance pools, decoupling entrances and randomizing overworld spawns or warp songs.
 * Picking up Gold Skulltula Tokens in non-Tokensanity displays a self-closing textbox which no longer freezes the player.
 * "Open Zora's Fountain" is changed to a dropdown with an intermediate option to only move King Zora from the start in the Adult era.
