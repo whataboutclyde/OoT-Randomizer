@@ -1534,19 +1534,21 @@ setting_infos = [
         name           = 'bombchus_in_logic',
         gui_text       = 'Bombchus Are Considered in Logic',
         gui_tooltip    = '''\
-            Bombchus are properly considered in logic.
+            Bombchus are properly considered in logic and
+            the game is changed to account for this fact.
 
             The first Bombchu pack will always be 20.
             Subsequent packs will be 5 or 10 based on
             how many you have.
 
-            Bombchus can be purchased for 60/99/180
-            rupees once they have been found.
+            Bombchus are no longer tied to the Bomb Bag.
+            Once Bombchus have been found, they can be 
+            purchased for 60/99/180 rupees and Bombchu
+            drops can be collected around the world.
 
             Bombchu Bowling opens with Bombchus.
-            Bombchus are available at Kokiri Shop
-            and the Bazaar. Bombchu refills cannot
-            be bought until Bombchus have been obtained.
+            Additional Bombchu refills are available at 
+            the Kokiri Shop and the Bazaar.
         ''',
         default        = False,
         shared         = True,

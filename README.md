@@ -14,6 +14,7 @@ Differences between this branch and the main Dev branch (on [Testrunner's Fork](
 * "Entrance Shuffle" (aka ER) is changed into a set of more advanced and customizable options including mixing entrance pools, decoupling entrances and randomizing overworld spawns or warp songs.
 * Picking up Gold Skulltula Tokens in non-Tokensanity displays a self-closing textbox which no longer freezes the player.
 * "Open Zora's Fountain" is changed to a dropdown with an intermediate option to only move King Zora from the start in the Adult era.
+* "Bombchus In Logic" is improved to include bombchu drops (from grass, pots, etc) that start dropping once you have found Bombchus.
 
 ## Index
 
