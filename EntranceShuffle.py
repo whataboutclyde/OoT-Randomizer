@@ -14,7 +14,7 @@ from Hints import get_hint_area
 
 def set_all_entrances_data(world):
     for type, forward_entry, *return_entry in entrance_shuffle_table:
-        forward_entrance = world.get_entrance(forward_entry[0]) 
+        forward_entrance = world.get_entrance(forward_entry[0])
         forward_entrance.data = forward_entry[1]
         forward_entrance.type = type
         forward_entrance.primary = True
@@ -51,7 +51,7 @@ def build_one_way_targets(world, types_to_include, exclude=[]):
     for pool_type in types_to_include:
         one_way_entrances += world.get_shufflable_entrances(type=pool_type)
     valid_one_way_entrances = list(filter(lambda entrance: entrance.name not in exclude and (entrance.shuffled or entrance.type not in ('OwlDrop', 'WarpSong', 'Spawn')), one_way_entrances))
-    return [entrance.get_new_target() for entrance in one_way_entrances]
+    return [entrance.get_new_target() for entrance in valid_one_way_entrances]
 
 
 entrance_shuffle_table = [
@@ -422,7 +422,7 @@ def shuffle_random_entrances(worlds):
 
         # Shuffle all entrances among the pools to shuffle
         for pool_type, entrance_pool in one_way_entrance_pools.items():
-            shuffle_entrance_pool(worlds, entrance_pool, one_way_target_entrance_pools[pool_type], locations_to_ensure_reachable, check_all=True)
+            shuffle_entrance_pool(world, worlds, entrance_pool, one_way_target_entrance_pools[pool_type], locations_to_ensure_reachable, check_all=True)
             # Delete all targets that we just placed from other one way target pools so multiple one way entrances don't use the same target
             replaced_entrances = [entrance.replaces for entrance in entrance_pool]
             for remaining_target in chain.from_iterable(one_way_target_entrance_pools.values()):
@@ -433,7 +433,7 @@ def shuffle_random_entrances(worlds):
                 delete_target_entrance(unused_target)
 
         for pool_type, entrance_pool in entrance_pools.items():
-            shuffle_entrance_pool(worlds, entrance_pool, target_entrance_pools[pool_type], locations_to_ensure_reachable)
+            shuffle_entrance_pool(world, worlds, entrance_pool, target_entrance_pools[pool_type], locations_to_ensure_reachable)
 
     # Multiple checks after shuffling entrances to make sure everything went fine
     max_playthrough = Playthrough.max_explore([world.state for world in worlds], complete_itempool)
@@ -455,14 +455,15 @@ def shuffle_random_entrances(worlds):
         raise EntranceShuffleError('Cannot beat game!')
 
     # Validate the worlds one last time to ensure all special conditions are still valid
-    try:
-        validate_worlds(worlds, None, locations_to_ensure_reachable, complete_itempool)
-    except EntranceShuffleError as error:
-        raise EntranceShuffleError('Worlds are not valid after shuffling entrances, Reason: %s' % error)
+    for world in worlds:
+        try:
+            validate_world(world, worlds, None, locations_to_ensure_reachable, complete_itempool)
+        except EntranceShuffleError as error:
+            raise EntranceShuffleError('Worlds are not valid after shuffling entrances, Reason: %s' % error)
 
 
 # Shuffle all entrances within a provided pool
-def shuffle_entrance_pool(worlds, entrance_pool, target_entrances, locations_to_ensure_reachable, check_all=False, retry_count=20):
+def shuffle_entrance_pool(world, worlds, entrance_pool, target_entrances, locations_to_ensure_reachable, check_all=False, retry_count=20):
 
     # Split entrances between those that have requirements (restrictive) and those that do not (soft). These are primarily age or time of day requirements.
     restrictive_entrances, soft_entrances = split_entrances_by_requirements(worlds, entrance_pool, target_entrances)
@@ -481,9 +482,9 @@ def shuffle_entrance_pool(worlds, entrance_pool, target_entrances, locations_to_
             else:
                 shuffle_entrances(worlds, soft_entrances, target_entrances, rollbacks)
 
-            # Fully validate the resulting worlds to ensure everything is still fine after shuffling this pool
+            # Fully validate the resulting world to ensure everything is still fine after shuffling this pool
             complete_itempool = [item for world in worlds for item in world.get_itempool_with_dungeon_items()]
-            validate_worlds(worlds, None, locations_to_ensure_reachable, complete_itempool)
+            validate_world(world, worlds, None, locations_to_ensure_reachable, complete_itempool)
 
             # If all entrances could be connected without issues, log connections and continue
             for entrance, target in rollbacks:
@@ -557,7 +558,7 @@ def shuffle_entrances(worlds, entrances, target_entrances, rollbacks, locations_
             try:
                 check_entrances_compatibility(entrance, target)
                 change_connections(entrance, target)
-                validate_worlds(worlds, entrance, locations_to_ensure_reachable, complete_itempool)
+                validate_world(entrance.world, worlds, entrance, locations_to_ensure_reachable, complete_itempool)
                 rollbacks.append((entrance, target))
                 break
             except EntranceShuffleError as error:
@@ -579,9 +580,9 @@ def check_entrances_compatibility(entrance, target):
 
 
 # Validate the provided worlds' structures, raising an error if it's not valid based on our criterias
-def validate_worlds(worlds, entrance_placed, locations_to_ensure_reachable, itempool):
+def validate_world(world, worlds, entrance_placed, locations_to_ensure_reachable, itempool):
 
-    if not worlds[0].decouple_entrances:
+    if not world.decouple_entrances:
         # Unless entrances are decoupled, we don't want the player to end up through certain entrances as the wrong age
         # This means we need to hard check that none of the relevant entrances are ever reachable as that age
         # This is mostly relevant when mixing entrance pools or shuffling special interiors (such as windmill or kak potion shop)
@@ -589,67 +590,62 @@ def validate_worlds(worlds, entrance_placed, locations_to_ensure_reachable, item
         CHILD_FORBIDDEN = ['Ganons Castle Fairy -> Castle Grounds', 'Carpenter Tent -> Gerudo Valley Far Side']
         ADULT_FORBIDDEN = ['Hyrule Castle Fairy -> Castle Grounds', 'Castle Storms Grotto -> Castle Grounds']
 
-        for world in worlds:
-            for entrance in world.get_shufflable_entrances():
-                if entrance.shuffled:
-                    if entrance.replaces:
-                        if entrance.replaces.name in CHILD_FORBIDDEN and not entrance_unreachable_as(entrance, 'child', already_checked=[entrance.replaces.reverse]):
-                            raise EntranceShuffleError('%s is replaced by an entrance with a potential child access' % entrance.replaces.name)
-                        elif entrance.replaces.name in ADULT_FORBIDDEN and not entrance_unreachable_as(entrance, 'adult', already_checked=[entrance.replaces.reverse]):
-                            raise EntranceShuffleError('%s is replaced by an entrance with a potential adult access' % entrance.replaces.name)
-                else:
-                    if entrance.name in CHILD_FORBIDDEN and not entrance_unreachable_as(entrance, 'child', already_checked=[entrance.reverse]):
-                        raise EntranceShuffleError('%s is potentially accessible as child' % entrance.name)
-                    elif entrance.name in ADULT_FORBIDDEN and not entrance_unreachable_as(entrance, 'adult', already_checked=[entrance.reverse]):
-                        raise EntranceShuffleError('%s is potentially accessible as adult' % entrance.name)
+        for entrance in world.get_shufflable_entrances():
+            if entrance.shuffled:
+                if entrance.replaces:
+                    if entrance.replaces.name in CHILD_FORBIDDEN and not entrance_unreachable_as(entrance, 'child', already_checked=[entrance.replaces.reverse]):
+                        raise EntranceShuffleError('%s is replaced by an entrance with a potential child access' % entrance.replaces.name)
+                    elif entrance.replaces.name in ADULT_FORBIDDEN and not entrance_unreachable_as(entrance, 'adult', already_checked=[entrance.replaces.reverse]):
+                        raise EntranceShuffleError('%s is replaced by an entrance with a potential adult access' % entrance.replaces.name)
+            else:
+                if entrance.name in CHILD_FORBIDDEN and not entrance_unreachable_as(entrance, 'child', already_checked=[entrance.reverse]):
+                    raise EntranceShuffleError('%s is potentially accessible as child' % entrance.name)
+                elif entrance.name in ADULT_FORBIDDEN and not entrance_unreachable_as(entrance, 'adult', already_checked=[entrance.reverse]):
+                    raise EntranceShuffleError('%s is potentially accessible as adult' % entrance.name)
 
     if locations_to_ensure_reachable:
-        max_playthrough = Playthrough.max_explore([world.state for world in worlds], itempool)
-        # If ALR is enabled, ensure all locations we want to keep reachable are indeed still reachable 
+        max_playthrough = Playthrough.max_explore([w.state for w in worlds], itempool)
+        # If ALR is enabled, ensure all locations we want to keep reachable are indeed still reachable
         # Otherwise, just continue if the game is still beatable
-        if not (worlds[0].check_beatable_only and max_playthrough.can_beat_game(False)):
+        if not (world.check_beatable_only and max_playthrough.can_beat_game(False)):
             max_playthrough.visit_locations(locations_to_ensure_reachable)
             for location in locations_to_ensure_reachable:
                 if not max_playthrough.visited(location):
                     raise EntranceShuffleError('%s is unreachable' % location.name)
 
-    if (worlds[0].shuffle_special_interior_entrances or worlds[0].shuffle_overworld_entrances or worlds[0].spawn_positions) and \
-       (entrance_placed == None or worlds[0].mix_entrance_pools or entrance_placed.type in ['SpecialInterior', 'Overworld', 'Spawn', 'WarpSong', 'OwlDrop']):
+    if (world.shuffle_special_interior_entrances or world.shuffle_overworld_entrances or world.spawn_positions) and \
+       (entrance_placed == None or world.mix_entrance_pools or entrance_placed.type in ['SpecialInterior', 'Overworld', 'Spawn', 'WarpSong', 'OwlDrop']):
             # At least one valid starting region with all basic refills should be reachable without using any items at the beginning of the seed
             # Note this creates an empty State rather than reuse world.state (which already has starting items).
-            no_items_playthrough = Playthrough([State(world) for world in worlds])
+            no_items_playthrough = Playthrough([State(w) for w in worlds])
 
             valid_starting_regions = ['Kokiri Forest', 'Kakariko Village']
-            for world in worlds:
-                if not any(region for region in valid_starting_regions if no_items_playthrough.can_reach(world.get_region(region))):
-                    raise EntranceShuffleError('Invalid starting area')
+            if not any(region for region in valid_starting_regions if no_items_playthrough.can_reach(world.get_region(region))):
+                raise EntranceShuffleError('Invalid starting area')
 
             # Check that a region where time passes is always reachable as both ages without having collected any items (except in closed forest)
-            time_travel_playthrough = Playthrough.with_items([world.state for world in worlds], [ItemFactory('Time Travel', world=world) for world in worlds])
+            time_travel_playthrough = Playthrough.with_items([w.state for w in worlds], [ItemFactory('Time Travel', world=w) for w in worlds])
 
-            for world in worlds:
-                if not (any(region for region in time_travel_playthrough.reachable_regions('child') if region.time_passes and region.world == world) and
-                        any(region for region in time_travel_playthrough.reachable_regions('adult') if region.time_passes and region.world == world)):
-                    raise EntranceShuffleError('Time passing is not guaranteed as both ages')
+            if not (any(region for region in time_travel_playthrough.reachable_regions('child') if region.time_passes and region.world == world) and
+                    any(region for region in time_travel_playthrough.reachable_regions('adult') if region.time_passes and region.world == world)):
+                raise EntranceShuffleError('Time passing is not guaranteed as both ages')
 
             # The player should be able to get back to ToT after going through time, without having collected any items
             # This is important to ensure that the player never loses access to the pedestal after going through time
-            for world in worlds:
-                if world.starting_age == 'child' and not time_travel_playthrough.can_reach(world.get_region('Temple of Time'), age='adult'):
-                    raise EntranceShuffleError('Path to Temple of Time as adult is not guaranteed')
-                elif world.starting_age == 'adult' and not time_travel_playthrough.can_reach(world.get_region('Temple of Time'), age='child'):
-                    raise EntranceShuffleError('Path to Temple of Time as child is not guaranteed')
+            if world.starting_age == 'child' and not time_travel_playthrough.can_reach(world.get_region('Temple of Time'), age='adult'):
+                raise EntranceShuffleError('Path to Temple of Time as adult is not guaranteed')
+            elif world.starting_age == 'adult' and not time_travel_playthrough.can_reach(world.get_region('Temple of Time'), age='child'):
+                raise EntranceShuffleError('Path to Temple of Time as child is not guaranteed')
 
-    if (worlds[0].shuffle_interior_entrances or worlds[0].shuffle_overworld_entrances) and \
-       (entrance_placed == None or worlds[0].mix_entrance_pools or entrance_placed.type in ['Interior', 'SpecialInterior', 'Overworld', 'Spawn', 'WarpSong', 'OwlDrop']):
+    if (world.shuffle_interior_entrances or world.shuffle_overworld_entrances) and \
+       (entrance_placed == None or world.mix_entrance_pools or entrance_placed.type in ['Interior', 'SpecialInterior', 'Overworld', 'Spawn', 'WarpSong', 'OwlDrop']):
         # The Big Poe Shop should always be accessible as adult without the need to use any bottles
         # Since we can't guarantee that items in the pool won't be placed behind bottles, we guarantee the access without using any items
         # This is important to ensure that players can never lock their only bottles by filling them with Big Poes they can't sell
-        no_items_time_travel_playthrough = Playthrough.with_items([State(world) for world in worlds], [ItemFactory('Time Travel', world=world) for world in worlds])
+        no_items_time_travel_playthrough = Playthrough.with_items([State(w) for w in worlds], [ItemFactory('Time Travel', world=w) for w in worlds])
 
-        for world in worlds:
-            if not no_items_time_travel_playthrough.can_reach(world.get_region('Castle Town Rupee Room'), age='adult'):
-                raise EntranceShuffleError('Big Poe Shop access is not guaranteed as adult')
+        if not no_items_time_travel_playthrough.can_reach(world.get_region('Castle Town Rupee Room'), age='adult'):
+            raise EntranceShuffleError('Big Poe Shop access is not guaranteed as adult')
 
         if world.shuffle_cows:
             impas_front_entrance = get_entrance_replacing(world.get_region('Impas House'), 'Kakariko Village -> Impas House')
@@ -658,7 +654,7 @@ def validate_worlds(worlds, entrance_placed, locations_to_ensure_reachable, item
 
 
 # Returns whether or not we can affirm the entrance can never be accessed as the given age
-def entrance_unreachable_as(entrance, age, already_checked=None):    
+def entrance_unreachable_as(entrance, age, already_checked=None):
     if already_checked == None:
         already_checked = []
 
