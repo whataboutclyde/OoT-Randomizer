@@ -1859,6 +1859,9 @@ setting_infos = [
         ''',
         default        = False,
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'decouple_entrances',
@@ -1870,6 +1873,9 @@ setting_infos = [
         ''',
         default        = False,
         shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
     ),
     Checkbutton(
         name           = 'owl_drops',

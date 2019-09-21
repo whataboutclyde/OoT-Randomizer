@@ -7,7 +7,7 @@ import random
 from functools import reduce
 
 from Fill import FillError
-from EntranceShuffle import EntranceShuffleError, change_connections, confirm_replacement, validate_worlds, check_entrances_compatibility
+from EntranceShuffle import EntranceShuffleError, change_connections, confirm_replacement, validate_world, check_entrances_compatibility
 from Hints import gossipLocations, GossipText
 from Item import ItemFactory, ItemIterator, IsItem
 from ItemPool import item_groups, get_junk_item
@@ -470,7 +470,7 @@ class WorldDistribution(object):
                 try:
                     check_entrances_compatibility(matched_entrance, matched_target)
                     change_connections(matched_entrance, matched_target)
-                    validate_worlds(worlds, None, locations_to_ensure_reachable, itempool)
+                    validate_world(matched_entrance.world, worlds, None, locations_to_ensure_reachable, itempool)
                 except EntranceShuffleError as error:
                     raise RuntimeError('Cannot connect %s To %s in world %d (Reason: %s)' % 
                                             (matched_entrance, matched_entrance.connected_region or matched_target.connected_region, self.id + 1, error))
