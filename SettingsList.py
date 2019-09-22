@@ -3293,11 +3293,11 @@ for info in setting_infos:
     if info.gui_text is not None and not is_mapped(info.name):
         raise UnmappedSettingError(f'{info.name} is defined but is not in the settings map. Add it to the settings_mapping or set the gui_text to None to suppress.')
 
-    if info.disable != None:
+    if info.name != 'randomize_settings' and info.disable != None:
         for option, disabling in info.disable.items():
             for setting in disabling.get('settings', []):
                 create_dependency(setting, info, option)
-            for section in disabling.get('setions', []):
+            for section in disabling.get('sections', []):
                 for setting in get_settings_from_section(section):
                     create_dependency(setting, info, option)
             for tab in disabling.get('tabs', []):
