@@ -16,6 +16,7 @@ Differences between this branch and the main Dev branch (on [Testrunner's Fork](
 * New cosmetic option to have all ingame item model colors match cosmetic colors (for hearts, magic and gauntlets), except item drop icons which aren't handled yet.
 * Double Defense has a separate item model to differentiate it from Heart Containers.
 * File Select heart colors match ingame UI hearts (for cosmetics).
+* "Randomize Main Rules" correctly randomizes options in the "World" section.
 
 ## Index
 
