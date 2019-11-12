@@ -110,20 +110,27 @@ magic_colors = {
     "White":             Color(0xFF, 0xFF, 0xFF),
 }
 
+#                        A Button                 Text Cursor              Shop Cursor              Save/Death Cursor
+#                        Pause Menu A Cursor      Pause Menu A Icon        A Note
 a_button_colors = {
-    "N64 Blue":         Color(0x5A, 0x5A, 0xFF),
-    "GameCube Green":   Color(0x00, 0xC8, 0x32),
+    "N64 Blue":         (Color(0x5A, 0x5A, 0xFF), Color(0x00, 0x50, 0xC8), Color(0x00, 0x50, 0xFF), Color(0x64, 0x64, 0xFF),
+                         Color(0x00, 0x32, 0xFF), Color(0x00, 0x64, 0xFF), Color(0x50, 0x96, 0xFF)),
+    "GameCube Green":   (Color(0x00, 0xC8, 0x32), Color(0x00, 0xC8, 0x50), Color(0x00, 0xFF, 0x50), Color(0x64, 0xFF, 0x64),
+                         Color(0x00, 0xFF, 0x32), Color(0x00, 0xFF, 0x64), Color(0x50, 0xFF, 0x96)),
 }
 
+#                       B Button
 b_button_colors = {
     "N64 Green":        Color(0x00, 0x96, 0x00),
     "GameCube Red":     Color(0xFF, 0x1E, 0x1E),
 }
 
+#                        C Button                 Pause Menu C Cursor      Pause Menu C Icon        C Note
 c_button_colors = {
-    "Default Yellow":   Color(0xFF, 0xA0, 0x00),
+    "Default Yellow":   (Color(0xFF, 0xA0, 0x00), Color(0xFF, 0xFF, 0x00), Color(0xFF, 0x96, 0x00), Color(0xFF, 0xFF, 0x32)),
 }
 
+#                       Start Button
 start_button_colors = {
     "N64 Red":          Color(0xC8, 0x00, 0x00),
     "GameCube Grey":    Color(0x78, 0x78, 0x78),
@@ -497,13 +504,44 @@ def patch_magic_colors(rom, settings, log, symbols):
 
 def patch_button_colors(rom, settings, log, symbols):
     buttons = [
-        ('A Button Color', settings.a_button_color, a_button_colors, symbols['CFG_A_BUTTON_COLOR']),
-        ('B Button Color', settings.b_button_color, b_button_colors, symbols['CFG_B_BUTTON_COLOR']),
-        ('C Button Color', settings.c_button_color, c_button_colors, symbols['CFG_C_BUTTON_COLOR']),
-        ('Start Button Color', settings.start_button_color, start_button_colors, symbols['CFG_START_BUTTON_COLOR']),
+        ('A Button Color', settings.a_button_color, a_button_colors, 
+            [('A Button Color', symbols['CFG_A_BUTTON_COLOR'], 
+                None),
+             ('Text Cursor Color', symbols['CFG_TEXT_CURSOR_COLOR'], 
+                [(0xB88E81, 0xB88E85, 0xB88E9)]), # Initial Inner Color
+             ('Shop Cursor Color', symbols['CFG_SHOP_CURSOR_COLOR'], 
+                None),
+             ('Save/Death Cursor Color', None, 
+                [(0xBBEBC2, 0xBBEBC3, 0xBBEBD6), (0xBBEDDA, 0xBBEDDB, 0xBBEDDE)]), # Save Cursor / Death Cursor
+             ('Pause Menu A Cursor Color', None, 
+                [(0xBC7849, 0xBC784B, 0xBC784D), (0xBC78A9, 0xBC78AB, 0xBC78AD), (0xBC78BB, 0xBC78BD, 0xBC78BF)]), # Inner / Pulse 1 / Pulse 2
+             ('Pause Menu A Icon Color', None, 
+                [(0x845754, 0x845755, 0x845756)]),
+             ('A Note Color', symbols['CFG_A_NOTE_COLOR'], # For Textbox Song Display
+                [(0xBB299A, 0xBB299B, 0xBB299E), (0xBB2C8E, 0xBB2C8F, 0xBB2C92), (0xBB2F8A, 0xBB2F8B, 0xBB2F96)]), # Pause Menu Song Display
+            ]),
+        ('B Button Color', settings.b_button_color, b_button_colors, 
+            [('B Button Color', symbols['CFG_B_BUTTON_COLOR'], 
+                None),
+            ]),
+        ('C Button Color', settings.c_button_color, c_button_colors, 
+            [('C Button Color', symbols['CFG_C_BUTTON_COLOR'], 
+                None),
+             ('Pause Menu C Cursor Color', None, 
+                [(0xBC7843, 0xBC7845, 0xBC7847), (0xBC7891, 0xBC7893, 0xBC7895), (0xBC78A3, 0xBC78A5, 0xBC78A7)]), # Inner / Pulse 1 / Pulse 2
+             ('Pause Menu C Icon Color', None, 
+                [(0x8456FC, 0x8456FD, 0x8456FE)]),
+             ('C Note Color', symbols['CFG_C_NOTE_COLOR'], # For Textbox Song Display
+                [(0xBB2996, 0xBB2997, 0xBB29A2), (0xBB2C8A, 0xBB2C8B, 0xBB2C96), (0xBB2F86, 0xBB2F87, 0xBB2F9A)]), # Pause Menu Song Display
+            ]),
+        ('Start Button Color', settings.start_button_color, start_button_colors, 
+            [('Start Button Color', None, 
+                [(0xAE9EC6, 0xAE9EC7, 0xAE9EDA)]),
+            ]),
     ]
 
-    for button, button_option, button_colors, symbol in buttons:
+    for button, button_option, button_colors, patches in buttons:
+        color_set = None
         # handle random
         if button_option == 'Random Choice':
             button_option = random.choice(button_colors.keys())
@@ -512,16 +550,28 @@ def patch_button_colors(rom, settings, log, symbols):
             color = [random.getrandbits(8), random.getrandbits(8), random.getrandbits(8)]
         # grab the color from the list
         elif button_option in button_colors:
-            color = list(button_colors[button_option])
+            color_set = [button_colors[button_option]] if isinstance(button_colors[button_option][0], int) else list(button_colors[button_option])
         # build color from hex code
         else:
             color = list(int(button_option[i:i+2], 16) for i in (0, 2, 4))
             button_option = 'Custom'
 
-        if button == 'Start Button Color':
-            rom.write_bytes(symbol, color)
-        else:
-            rom.write_int16s(symbol, color)
+        # apply all button color patches
+        i = 0
+        for patch, symbol, byte_addresses in patches:
+            if color_set != None:
+                color = color_set[i]
+
+            if symbol:
+                rom.write_int16s(symbol, color)
+
+            if byte_addresses:
+                for r_addr, g_addr, b_addr in byte_addresses:
+                    rom.write_byte(r_addr, color[0])
+                    rom.write_byte(g_addr, color[1])
+                    rom.write_byte(b_addr, color[2])
+
+            i += 1
 
         log.button_colors[button] = dict(option=button_option, color=''.join(['{:02X}'.format(c) for c in color]))
 
@@ -633,7 +683,7 @@ patch_sets = {
             "CFG_RAINBOW_SWORD_OUTER_ENABLED": 0x0012,
         }
     },
-    0x1F073FC8: {
+    0x1F073FC9: {
         "patches": [
             patch_dpad,
             patch_sword_trails,
@@ -647,10 +697,13 @@ patch_sets = {
             "CFG_A_BUTTON_COLOR": 0x0010,
             "CFG_B_BUTTON_COLOR": 0x0016,
             "CFG_C_BUTTON_COLOR": 0x001C,
-            "CFG_START_BUTTON_COLOR": 0x0022,
-            "CFG_DISPLAY_DPAD": 0x0025,
-            "CFG_RAINBOW_SWORD_INNER_ENABLED": 0x0026,
-            "CFG_RAINBOW_SWORD_OUTER_ENABLED": 0x0027,
+            "CFG_TEXT_CURSOR_COLOR": 0x0022,
+            "CFG_SHOP_CURSOR_COLOR": 0x0028,
+            "CFG_A_NOTE_COLOR": 0x002E,
+            "CFG_C_NOTE_COLOR": 0x0034,
+            "CFG_DISPLAY_DPAD": 0x003A,
+            "CFG_RAINBOW_SWORD_INNER_ENABLED": 0x003B,
+            "CFG_RAINBOW_SWORD_OUTER_ENABLED": 0x003C,
         }
     },
 }
