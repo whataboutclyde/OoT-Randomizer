@@ -450,14 +450,14 @@ def patch_gauntlet_colors(rom, settings, log, symbols):
 def patch_heart_colors(rom, settings, log, symbols):
     # patch heart colors
     hearts = [
-        ('Heart Colors', settings.heart_color, symbols['CFG_HEART_COLOR'],
+        ('Heart Colors', settings.heart_color, symbols['CFG_HEART_COLOR'], 0xBB0994,
             ([0x14DA474, 0x14DA594, 0x14B701C, 0x14B70DC], 
              [0x14B70FC, 0x14DA494, 0x14DA5B4, 0x14B700C, 0x14B702C, 0x14B703C, 0x14B704C, 0x14B705C, 
               0x14B706C, 0x14B707C, 0x14B708C, 0x14B709C, 0x14B70AC, 0x14B70BC, 0x14B70CC])), # GI Model DList colors
     ]
     heart_color_list = get_heart_colors()
 
-    for heart, heart_option, symbol, model_addresses in hearts:
+    for heart, heart_option, symbol, file_select_address, model_addresses in hearts:
         # handle random
         if heart_option == 'Random Choice':
             heart_option = random.choice(heart_color_list)
@@ -471,9 +471,12 @@ def patch_heart_colors(rom, settings, log, symbols):
         else:
             color = list(int(heart_option[i:i+2], 16) for i in (0, 2, 4))
             heart_option = 'Custom'
-        rom.write_int16s(symbol, color)
+        rom.write_int16s(symbol, color) # symbol for ingame HUD
+        rom.write_int16s(file_select_address, color) # file select normal hearts
+        if heart_option != 'Red':
+            rom.write_int16s(file_select_address + 6, color) # file select DD hearts
         if settings.correct_model_colors:
-            patch_model_colors(rom, color, model_addresses)
+            patch_model_colors(rom, color, model_addresses) # heart model colors
         log.heart_colors[heart] = dict(option=heart_option, color=''.join(['{:02X}'.format(c) for c in color]))
 
 
