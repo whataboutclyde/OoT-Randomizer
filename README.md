@@ -9,11 +9,9 @@ Instead, you can open an issue on this fork [here](https://github.com/Roman971/O
 Differences between this branch and the main Dev branch (on [Testrunner's Fork](https://github.com/TestRunnerSRL/OoT-Randomizer/tree/Dev)):
 * Various GUI tweaks and improvements along with setting tooltip/option changes
 * "Add Open Kakariko Gate" option to have the gate to Death Mountain open from the start
-* "Triforce Hunt" option from [KevinPal aka shadeslayer's Triforce Hunt Branch](https://github.com/KevinPal/OoT-Randomizer/tree/triforce)
 * New cosmetic options to configure HUD Button colors from [Cuphat's HUD Colors Branch](https://github.com/Cuphat/OoT-Randomizer/tree/hud_colors)
 * "Entrance Shuffle" (aka ER) is changed into a set of more advanced and customizable options including mixing entrance pools, decoupling entrances and randomizing overworld spawns or warp songs.
 * Picking up Gold Skulltula Tokens in non-Tokensanity displays a self-closing textbox which no longer freezes the player.
-* "Open Zora's Fountain" is changed to a dropdown with an intermediate option to only move King Zora from the start in the Adult era.
 * "Bombchus In Logic" is improved to include bombchu drops (from grass, pots, etc) that start dropping once you have found Bombchus.
 * New cosmetic option to have all ingame item model colors match cosmetic colors (for hearts, magic and gauntlets), except item drop icons which aren't handled yet.
 * Double Defense has a separate item model to differentiate it from Heart Containers.
@@ -82,6 +80,24 @@ do that.
 player.
 
 ## Changelog
+
+#### New Features
+* Triforce Hunt
+  * Collect some number of Triforce Pieces to beat the game instead of beating Ganon
+  * Multiworld Triforce counts are collective, so once the total is reach across all players everyone wins.
+
+#### Updated Settings 
+* Open Zora Fountain now has an open only adult option.
+
+#### Other Changed
+* Non-Always Location hints cannot be placed for an area that already has a Foolish hint.
+  * If the location hint is placed first, then it can still appear in a foolish hinted area, however in Tournament hint distribution the Foolish hints are placed first so that cannot happen.
+* Refactored Logic once again. It now uses helper json rules and rules and reference other rules
+
+#### Bug Fixes
+* Minor stability fix in Plando
+* Fixed two chests in MQ Shadow Temple that had swapped names in plando and spoilers
+
 
 ### 5.1
 

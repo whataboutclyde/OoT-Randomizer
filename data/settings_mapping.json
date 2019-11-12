@@ -149,7 +149,8 @@
             "bridge",
             "bridge_tokens",
             "triforce_hunt",
-            "bombchus_in_logic",            
+            "triforce_goal_per_world",
+            "bombchus_in_logic",
             "one_item_per_dungeon",
             "trials_random",
             "trials"
