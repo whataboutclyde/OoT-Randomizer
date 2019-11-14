@@ -223,7 +223,7 @@ entrance_shuffle_table = [
     ('Grotto',          ('Gerudo Fortress -> Gerudo Fortress Storms Grotto',                { 'grotto_id': 0x1D, 'entrance': 0x036D, 'content': 0xFF, 'scene': 0x5D }),
                         ('Gerudo Fortress Storms Grotto -> Gerudo Fortress',                { 'grotto_id': 0x1D, 'entrance': 0x0129, 'room': 0x00, 'angle': 0x4000, 'pos': (0x43BE42C0, 0x43A68000, 0xC4C317B1) })),
     ('Grotto',          ('Gerudo Valley Far Side -> Gerudo Valley Storms Grotto',           { 'grotto_id': 0x1E, 'entrance': 0x05BC, 'content': 0xF0, 'scene': 0x5A }),
-                        ('Gerudo Valley Storms Grotto -> Gerudo Valley Far Side',           { 'grotto_id': 0x1E, 'entrance': 0x022D, 'room': 0x00, 'angle': 0x9555, 'pos': (0xC4A5CAD2, 0x41700000, 0x955504FF) })),
+                        ('Gerudo Valley Storms Grotto -> Gerudo Valley Far Side',           { 'grotto_id': 0x1E, 'entrance': 0x022D, 'room': 0x00, 'angle': 0x9555, 'pos': (0xC4A5CAD2, 0x41700000, 0xC475FF9B) })),
     ('Grotto',          ('Gerudo Valley Grotto Ledge -> Gerudo Valley Octorok Grotto',      { 'grotto_id': 0x1F, 'entrance': 0x05AC, 'content': 0xF2, 'scene': 0x5A }),
                         ('Gerudo Valley Octorok Grotto -> Gerudo Valley Grotto Ledge',      { 'grotto_id': 0x1F, 'entrance': 0x0117, 'room': 0x00, 'angle': 0x8000, 'pos': (0x4391C1A4, 0xC40AC000, 0x44B8CC9B) })),
     ('Grotto',          ('Lost Woods Beyond Mido -> Deku Theater',                          { 'grotto_id': 0x20, 'entrance': 0x05C4, 'content': 0xF3, 'scene': 0x5B }),
