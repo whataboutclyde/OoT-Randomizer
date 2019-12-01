@@ -415,7 +415,7 @@ def patch_heart_colors(rom, settings, log, symbols):
             color = list(int(heart_option[i:i+2], 16) for i in (0, 2, 4))
             heart_option = 'Custom'
         rom.write_int16s(symbol, color)
-        if settings.correct_model_colors:
+        if settings.correct_model_colors and heart_option != 'Red':
             patch_model_colors(rom, color, model_addresses)
         log.heart_colors[heart] = dict(option=heart_option, color=''.join(['{:02X}'.format(c) for c in color]))
 
@@ -440,7 +440,7 @@ def patch_magic_colors(rom, settings, log, symbols):
             color = list(int(magic_option[i:i+2], 16) for i in (0, 2, 4))
             magic_option = 'Custom'
         rom.write_int16s(symbol, color)
-        if settings.correct_model_colors:
+        if settings.correct_model_colors and magic_option != 'Green':
             patch_model_colors(rom, color, model_addresses)
         log.magic_colors[magic_color] = dict(option=magic_option, color=''.join(['{:02X}'.format(c) for c in color]))
 
