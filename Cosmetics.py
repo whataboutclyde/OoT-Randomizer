@@ -475,8 +475,8 @@ def patch_heart_colors(rom, settings, log, symbols):
         rom.write_int16s(file_select_address, color) # file select normal hearts
         if heart_option != 'Red':
             rom.write_int16s(file_select_address + 6, color) # file select DD hearts
-        if settings.correct_model_colors:
-            patch_model_colors(rom, color, model_addresses) # heart model colors
+            if settings.correct_model_colors:
+                patch_model_colors(rom, color, model_addresses) # heart model colors
         log.heart_colors[heart] = dict(option=heart_option, color=''.join(['{:02X}'.format(c) for c in color]))
 
 
@@ -500,7 +500,7 @@ def patch_magic_colors(rom, settings, log, symbols):
             color = list(int(magic_option[i:i+2], 16) for i in (0, 2, 4))
             magic_option = 'Custom'
         rom.write_int16s(symbol, color)
-        if settings.correct_model_colors:
+        if settings.correct_model_colors and magic_option != 'Green':
             patch_model_colors(rom, color, model_addresses)
         log.magic_colors[magic_color] = dict(option=magic_option, color=''.join(['{:02X}'.format(c) for c in color]))
 
