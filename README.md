@@ -15,6 +15,7 @@ Differences between this branch and the main Dev branch (on [Testrunner's Fork](
 * "Bombchus In Logic" is improved to include bombchu drops (from grass, pots, etc) that start dropping once you have found Bombchus.
 * New cosmetic option to have all ingame item model colors match cosmetic colors (for hearts, magic and gauntlets), except item drop icons which aren't handled yet.
 * Double Defense has a separate item model to differentiate it from Heart Containers.
+* Ice Trap Appearance option from [Dotzo's Junk Ice Trap Branch](https://github.com/dotzo/OoT-Randomizer/tree/JunkIceTraps)
 
 ## Index
 
