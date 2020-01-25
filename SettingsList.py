@@ -131,6 +131,12 @@ logic_tricks = {
                     Silver Rupee Chest. May need to make multiple
                     trips.
                     '''},
+    'Hidden Grottos without Stone of Agony': {
+        'name'    : 'logic_grottos_without_agony',
+        'tooltip' : '''\
+                    Allows entering hidden grottos without the
+                    Stone of Agony.
+                    '''},
     'Pass Through Visible One-Way Collisions': {
         'name'    : 'logic_visible_collisions',
         'tooltip' : '''\
@@ -282,6 +288,13 @@ logic_tricks = {
                     Child Link can blow up the wall using a nearby bomb
                     flower. You must backwalk with the flower and then
                     quickly throw it toward the wall.
+                    '''},
+    'Goron City Spinning Pot PoH with Strength': {
+        'name'    : 'logic_goron_city_pot_with_strength',
+        'tooltip' : '''\
+                    Allows for stopping the Goron City Spinning
+                    Pot using a bomb flower alone, requiring 
+                    strength in lieu of inventory explosives.
                     '''},
     'Water Temple Boss Key Chest with Iron Boots': {
         'name'    : 'logic_water_bk_chest',
