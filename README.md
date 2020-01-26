@@ -13,7 +13,7 @@ Differences between this branch and the main Dev branch (on [Testrunner's Fork](
 * "Entrance Shuffle" (aka ER) is changed into a set of more advanced and customizable options including mixing entrance pools, decoupling entrances and randomizing overworld spawns or warp songs.
 * Picking up Gold Skulltula Tokens in non-Tokensanity displays a self-closing textbox which no longer freezes the player.
 * "Bombchus In Logic" is improved to include bombchu drops (from grass, pots, etc) that start dropping once you have found Bombchus.
-* New cosmetic option to have all ingame item model colors match cosmetic colors (for hearts, magic and gauntlets), except item drop icons which aren't handled yet.
+* New cosmetic option to have all ingame item model colors, as well as drop icons, match cosmetic colors (for hearts, magic and gauntlets).
 
 ## Index
 
