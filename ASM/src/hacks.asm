@@ -1541,3 +1541,17 @@ skip_GS_BGS_text:
     jal     kz_moved_check
     nop
     or      a0, s0, zero
+
+;==================================================================================================
+; Base Get Item Draw Override
+;==================================================================================================
+.orga 0xACD020
+.area 0x44
+    addiu   sp, sp, -0x18
+    sw      ra, 0x0014(sp)
+    jal     base_draw_gi_model
+    nop
+    lw      ra, 0x0014(sp)
+    jr      ra
+    addiu   sp, sp, 0x18
+.endarea
