@@ -130,6 +130,8 @@ item_draw_table_entry_t item_draw_table[] = {
     [0x72] = { draw_gi_bullet_bags,         { 0x06000B70, 0x06000B10, 0x06000F48, 0x06000B50, 0x06000FF0 } }, // Bullet Bag (50)
     [0x73] = { draw_gi_various_opa0,        { 0x06000960 } }, // Kokiri Sword
     [0x74] = { draw_gi_gs_token,            { 0x06004DB0, 0x06004EB8 } }, // Gold Skulltula Token II (only for En_Si)
+
+    [0x75] = { draw_gi_various_opa0,        { 0x06000660 } }, // Triforce Piece
 };
 
 void base_draw_gi_model(z64_game_t *game, uint32_t draw_id) {
