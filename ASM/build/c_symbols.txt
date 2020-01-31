@@ -72,7 +72,7 @@ SYMBOL TABLE:
 00000018 l       .rodata.cst8	00000000 $LC2
 00000020 l       .rodata.cst8	00000000 $LC3
 00000000 l    df *ABS*	00000000 util.c
-00003a18 g     F .text	00000114 draw_gi_deku_nut
+00003a64 g     F .text	00000114 draw_gi_deku_nut
 0000553c g     F .text	0000007c scale_factor
 00004cf4 g     F .text	0000001c give_defense
 00004e60 g     F .text	0000002c call_effect_function
@@ -80,9 +80,9 @@ SYMBOL TABLE:
 00002aac g     F .text	00000080 give_ice_trap
 00001a98 g     F .text	0000007c item_overrides_init
 00004f88 g     F .text	00000018 scale_upgrade
-00003d4c g     F .text	0000009c draw_gi_various_opa0
+00002e4c g     F .text	0000009c draw_gi_various_opa0
 00000000         *UND*	00000000 CFG_HEART_COLOR
-000040f0 g     F .text	0000012c draw_gi_magic_arrows
+00003430 g     F .text	0000012c draw_gi_magic_arrows
 00002a3c g     F .text	0000004c rupee_hud_color
 00004e94 g     F .text	00000014 hookshot_upgrade
 00001cc8 g     F .text	0000004c lookup_override
@@ -93,17 +93,17 @@ SYMBOL TABLE:
 00000024 g     O .sdata	00000004 beating_no_dd
 00001570 g     F .text	00000290 process_extern_ctxt
 00001a34 g     F .text	0000001c override_fog_state
-000033d4 g     F .text	0000018c draw_gi_gs_token
+000043d4 g     F .text	0000018c draw_gi_gs_token
 00000034 g     O .sbss	00000004 active_override_is_outgoing
 0000029c g     F .text	0000007c get_chest_override_color
 00004d2c g     F .text	00000024 give_double_magic
 00000018 g     O .sdata	00000004 normal_dd
-00003f00 g     F .text	000000c0 draw_gi_various_xlu01
+00003128 g     F .text	000000c0 draw_gi_various_xlu01
 00005094 g     F .text	00000070 letter_to_bottle
 00005908 g     F .text	00000064 ocarina_of_time_draw
 00001a50 g     F .text	00000048 check_ganon_entry
 00000180 g     O .data	00000010 items_sprite
-00003910 g     F .text	00000108 draw_gi_goron_swords
+0000395c g     F .text	00000108 draw_gi_goron_swords
 00000000         *UND*	00000000 CFG_DISPLAY_DPAD
 00000020 g     O .sbss	00000004 active_item_graphic_id
 00000150 g     O .data	00000010 dpad_sprite
@@ -119,7 +119,7 @@ SYMBOL TABLE:
 000001bc g     O .data	00001098 item_draw_table
 00000010 g     O .sbss	00000004 cfg_file_select_hash
 00005df8 g     F .text	00000028 health_and_magic_refill
-00002c6c g     F .text	000001d0 draw_gi_blue_fire_candle
+00004560 g     F .text	000001d0 draw_gi_blue_fire_candle
 00000048 g     O .sbss	00000001 pending_freezes
 00004b5c g     F .text	00000008 no_effect
 00005f3c g     F .text	00000148 text_flush
@@ -132,7 +132,7 @@ SYMBOL TABLE:
 00002064 g     F .text	0000006c after_item_received
 00004e8c g     F .text	00000008 no_upgrade
 00005038 g     F .text	0000001c arrows_to_rupee
-00003de8 g     F .text	00000118 draw_gi_various_opa0_xlu1
+000031e8 g     F .text	00000118 draw_gi_various_opa0_xlu1
 00000038 g     O .sbss	00000008 active_override
 00000000         *UND*	00000000 INCOMING_ITEM
 00000004 g     O .sdata	00000004 dungeon_count
@@ -144,7 +144,7 @@ SYMBOL TABLE:
 00000218 g     F .text	00000084 get_chest_override_size
 0000568c g     F .text	0000002c models_reset
 00000000 g     F .text	00000008 agony_inside_radius_setup
-00004708 g     F .text	00000170 draw_gi_scales
+00003ef0 g     F .text	00000170 draw_gi_scales
 00000170 g     O .data	00000010 quest_items_sprite
 00001f9c g     F .text	00000060 after_key_received
 00006604 g     F .text	00000034 heap_alloc
@@ -156,7 +156,7 @@ SYMBOL TABLE:
 00000000         *UND*	00000000 FONT_TEXTURE
 00000000         *UND*	00000000 OCARINAS_SHUFFLED
 000022a0 g     F .text	0000010c get_item
-00004464 g     F .text	00000144 draw_gi_various_opa10_xlu32
+0000355c g     F .text	00000144 draw_gi_various_opa10_xlu32
 00000000         *UND*	00000000 CHEST_SIZE_MATCH_CONTENTS
 00000000         *UND*	00000000 CFG_RAINBOW_SWORD_OUTER_ENABLED
 00004d10 g     F .text	0000001c give_magic
@@ -177,9 +177,9 @@ SYMBOL TABLE:
 000024cc g     F .text	00000070 give_sarias_gift
 000057b8 g     F .text	00000088 small_key_draw
 00005754 g     F .text	00000064 heart_piece_draw
-00004878 g     F .text	0000015c draw_gi_bullet_bags
+000036a0 g     F .text	0000015c draw_gi_bullet_bags
 00002594 g     F .text	000001a0 sprite_load
-00002bc8 g     F .text	000000a4 draw_gi_sold_out
+00002c88 g     F .text	000000a4 draw_gi_sold_out
 000001a0 g     O .data	00000010 stones_sprite
 00000000         *UND*	00000000 OUTGOING_KEY
 000000c4 g     O .data	00000014 extern_ctxt
@@ -192,7 +192,7 @@ SYMBOL TABLE:
 00000018 g     O .sbss	00000001 satisified_pending_frames
 00005464 g     F .text	00000060 scale_top_matrix
 00001ffc g     F .text	00000068 pop_ice_trap
-00003b2c g     F .text	00000118 draw_gi_recovery_heart
+00003b78 g     F .text	00000118 draw_gi_recovery_heart
 00002564 g     F .text	00000030 sprite_bytes
 00004ed4 g     F .text	0000002c bomb_bag_upgrade
 00004fd8 g     F .text	00000010 magic_upgrade
@@ -200,7 +200,7 @@ SYMBOL TABLE:
 00000008 g     O .sbss	00000004 cfg_dungeon_info_mq_need_map
 00005360 g     F .text	00000028 load_object
 00005018 g     F .text	00000020 ocarina_upgrade
-000045a8 g     F .text	00000160 draw_gi_small_rupees
+000037fc g     F .text	00000160 draw_gi_small_rupees
 00004e10 g     F .text	00000050 resolve_upgrades
 00000020 g     O .sdata	00000004 normal_no_dd
 00005af8 g     F .text	00000064 bowling_heart_piece_draw
@@ -224,12 +224,12 @@ SYMBOL TABLE:
 000056b8 g     F .text	0000005c lookup_model_by_override
 00004c2c g     F .text	00000038 give_tycoon_wallet
 00000044 g     O .sbss	00000004 item_overrides_count
-00004374 g     F .text	000000f0 draw_gi_various_opa1023
+00002ee8 g     F .text	000000f0 draw_gi_various_opa1023
 00002198 g     F .text	00000108 handle_pending_items
 00004fe8 g     F .text	00000030 bombchu_upgrade
 000055b8 g     F .text	00000088 draw_model
 00004d90 g     F .text	00000018 give_bean_pack
-000049d4 g     F .text	00000150 draw_gi_wallets
+00002fd8 g     F .text	00000150 draw_gi_wallets
 00004d5c g     F .text	00000018 give_song
 00000008 g     O .sdata	00000004 last_fog_distance
 00000030 g     O .sdata	00000006 defaultHeart
@@ -241,22 +241,22 @@ SYMBOL TABLE:
 00000000         *UND*	00000000 SPEED_MULTIPLIER
 0000002c g     O .sbss	00000004 active_item_action_id
 000020d0 g     F .text	000000c8 try_pending_item
-00003620 g     F .text	00000120 draw_gi_compass
+00002d2c g     F .text	00000120 draw_gi_compass
 00004da8 g     F .text	0000002c fill_wallet_upgrade
-00003560 g     F .text	000000c0 draw_gi_eggs_and_medallions
+00002bc8 g     F .text	000000c0 draw_gi_eggs_and_medallions
 00000064 g     O .sbss	00000004 heap_next
 00000004 g     O .data	0000000e cfg_dungeon_rewards
 00000000         *UND*	00000000 TRIFORCE_ICON_TEXTURE
 00004d74 g     F .text	0000001c ice_trap_effect
-00002e3c g     F .text	00000208 draw_gi_poe_bottles
+0000491c g     F .text	00000208 draw_gi_poe_bottles
 000051ec g     F .text	00000100 c_equipment_menu_slot_filled
 00004c70 g     F .text	00000050 give_bottle
 00001c24 g     F .text	000000a4 lookup_override_by_key
 000052ec g     F .text	00000074 load_object_file
-0000421c g     F .text	00000158 draw_gi_magic_spells
+00003d98 g     F .text	00000158 draw_gi_magic_spells
 000054c4 g     F .text	00000078 draw_model_low_level
-00003044 g     F .text	000001ec draw_gi_fairy_lantern
-00003230 g     F .text	000001a4 draw_gi_mirror_shield
+00004730 g     F .text	000001ec draw_gi_fairy_lantern
+00004230 g     F .text	000001a4 draw_gi_mirror_shield
 00004b24 g     F .text	00000038 base_draw_gi_model
 00000000         *UND*	00000000 OUTGOING_ITEM
 00000010 g     O .bss	00000018 pending_item_queue
@@ -273,12 +273,12 @@ SYMBOL TABLE:
 00000004 g     O .sbss	00000004 cfg_dungeon_info_reward_need_compass
 00000058 g     O .sbss	00000002 triforce_hunt_enabled
 0000000c g     O .sbss	00000004 cfg_dungeon_info_mq_enable
-00003740 g     F .text	000001d0 draw_gi_potions
+00004060 g     F .text	000001d0 draw_gi_potions
 00000000         *UND*	00000000 C_HEAP
 00001b14 g     F .text	00000110 get_override_search_key
 00000014 g     O .sbss	00000001 NO_ESCAPE_SEQUENCE
 00001dec g     F .text	0000004c clear_override
-00003fc0 g     F .text	00000130 draw_gi_coins_and_cuccos
+00003300 g     F .text	00000130 draw_gi_coins_and_cuccos
 00001f68 g     F .text	00000034 pop_pending_item
 0000253c g     F .text	00000028 sprite_bytes_per_tile
 00004dd4 g     F .text	0000003c get_item_row
@@ -289,7 +289,7 @@ SYMBOL TABLE:
 00000000         *UND*	00000000 PLAYER_NAME_ID
 00000000 g     O .sbss	00000004 cfg_dungeon_info_reward_need_altar
 00000000 g     O .sdata	00000004 cfg_dungeon_info_enable
-00003c44 g     F .text	00000108 draw_gi_fish_bottle
+00003c90 g     F .text	00000108 draw_gi_fish_bottle
 00005640 g     F .text	0000004c models_init
 
 
