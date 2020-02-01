@@ -14,15 +14,15 @@
 
 item_draw_table_entry_t item_draw_table[] = {
     [0x00] = { draw_gi_various_opa0_xlu1,   { 0x06000670, 0x06000750 } }, // Empty Bottle
-    [0x01] = { draw_gi_various_opa0,        { 0x06000800 } }, // Small Key
-    [0x02] = { draw_gi_various_xlu01,       { 0x06000A80, 0x06000AE0 } }, // Music Note (Green)
-    [0x03] = { draw_gi_various_xlu01,       { 0x06000A90, 0x06000AE0 } }, // Music Note (Red)
-    [0x04] = { draw_gi_various_xlu01,       { 0x06000AA0, 0x06000AE0 } }, // Music Note (Blue)
-    [0x05] = { draw_gi_various_xlu01,       { 0x06000AB0, 0x06000AE0 } }, // Music Note (Orange)
-    [0x06] = { draw_gi_various_xlu01,       { 0x06000AC0, 0x06000AE0 } }, // Music Note (Purple)
-    [0x07] = { draw_gi_various_xlu01,       { 0x06000AD0, 0x06000AE0 } }, // Music Note (Yellow)
+    [0x01] = { draw_gi_small_keys,          { 0x06000800, 0xFFFFFFFF, 0x3C505AFF } }, // Small Key
+    [0x02] = { draw_gi_song_notes,          { 0x06000AE0, 0x00C800FF } }, // Music Note (Green)
+    [0x03] = { draw_gi_song_notes,          { 0x06000AE0, 0xFF3200FF } }, // Music Note (Red)
+    [0x04] = { draw_gi_song_notes,          { 0x06000AE0, 0x0096FFFF } }, // Music Note (Blue)
+    [0x05] = { draw_gi_song_notes,          { 0x06000AE0, 0xFF9600FF } }, // Music Note (Orange)
+    [0x06] = { draw_gi_song_notes,          { 0x06000AE0, 0xC832FFFF } }, // Music Note (Purple)
+    [0x07] = { draw_gi_song_notes,          { 0x06000AE0, 0xC8FF00FF } }, // Music Note (Yellow)
     [0x08] = { draw_gi_recovery_heart,      { 0x060000E0 } }, // Recovery Heart
-    [0x09] = { draw_gi_various_opa0_xlu1,   { 0x06000CA0, 0x06000F08 } }, // Boss Key
+    [0x09] = { draw_gi_boss_keys,           { 0x06000CA0, 0x06000F08, 0xFFAAFFFF, 0xFF0064FF } }, // Boss Key
     [0x0A] = { draw_gi_compass,             { 0x06000960, 0x06000C50 } }, // Compass
     [0x0B] = { draw_gi_eggs_and_medallions, { 0x06000CB0, 0x06000E18 } }, // Forest Medallion
     [0x0C] = { draw_gi_eggs_and_medallions, { 0x06001AF0, 0x06000E18 } }, // Fire Medallion
