@@ -284,6 +284,7 @@
 ; Replaces: code that draws the fade-out rectangle on file load
 .orga 0xBAF738 ; In memory: 0x803B3538
 .area 0x60, 0
+    or      a1, r0, s0   ; menu data
     jal     draw_file_select_hash
     andi    a0, t8, 0xFF ; a0 = alpha channel of fade-out rectangle
 
