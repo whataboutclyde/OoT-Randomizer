@@ -101,6 +101,19 @@
     nop
     nop
 
+; Change graphic ID to be treated as unsigned
+; Replaces: lb      t9, 0x0852(s0)
+.orga 0xBE6538
+    lbu     t9, 0x0852(s0)
+
+; Replaces: lb      v0, 0x0852(s0)
+.orga 0xAF1398
+    lbu     v0, 0x0852(s0)
+
+; Replaces: lb      v0, 0x0852(s0)
+.orga 0xAF13AC
+    lbu     v0, 0x0852(s0)
+
 ; Override chest speed
 ; Replaces:
 ;   lb      t2, 0x0002 (t1)
