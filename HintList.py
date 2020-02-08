@@ -60,7 +60,7 @@ def getRequiredHints(world):
 # Hints required under certain settings
 conditional_always = {
     '10 Big Poes':               lambda world: world.big_poe_count > 3,
-    'Deku Theater Skull Mask':   lambda world: world.hint_dist == 'tournament',
+    'Deku Theater Skull Mask':   lambda world: world.hint_dist in ("tournament", "tournament-no-woth-barren"),
     'Song from Ocarina of Time': lambda world: world.bridge not in ('stones', 'dungeons') and world.shuffle_ganon_bosskey not in ('lacs_stones', 'lacs_dungeons'),
     'Ocarina of Time':           lambda world: world.bridge not in ('stones', 'dungeons') and world.shuffle_ganon_bosskey not in ('lacs_stones', 'lacs_dungeons'),
     'Sheik in Kakariko':         lambda world: world.bridge not in ('medallions', 'dungeons') and world.shuffle_ganon_bosskey not in ('lacs_medallions', 'lacs_dungeons'),

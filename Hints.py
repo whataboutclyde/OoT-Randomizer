@@ -527,6 +527,14 @@ hint_dist_sets = {
         'sometimes': (0.0, 2),
         'random':    (0.0, 2),
     }),
+    'tournament-no-woth-barren': OrderedDict({
+        # (number of hints, count per hint)
+        'junk':      (1.0, 1),
+        'trial':     (0.0, 3),
+        'always':    (0.0, 3),
+        'sometimes': (0.0, 3),
+        'random':    (0.0, 3),
+    }),
 }
 
 
@@ -607,7 +615,7 @@ def buildWorldGossipHints(spoiler, world, checkedLocations=None):
     hint_prob  = list(hint_prob)
     hint_counts = {}
 
-    if world.hint_dist == "tournament":
+    if world.hint_dist in ("tournament", "tournament-no-woth-barren"):
         fixed_hint_types = []
         for hint_type in hint_types:
             fixed_hint_types.extend([hint_type] * int(hint_dist[hint_type][0]))
@@ -615,7 +623,7 @@ def buildWorldGossipHints(spoiler, world, checkedLocations=None):
         current_fill_type = fill_hint_types.pop(0)
 
     while stoneIDs:
-        if world.hint_dist == "tournament":
+        if world.hint_dist in ("tournament", "tournament-no-woth-barren"):
             if fixed_hint_types:
                 hint_type = fixed_hint_types.pop(0)
             else:
@@ -645,7 +653,7 @@ def buildWorldGossipHints(spoiler, world, checkedLocations=None):
         if hint == None:
             index = hint_types.index(hint_type)
             hint_prob[index] = 0
-            if world.hint_dist == "tournament" and hint_type == current_fill_type:
+            if world.hint_dist in ("tournament", "tournament-no-woth-barren") and hint_type == current_fill_type:
                 logging.getLogger('').info('Not enough valid %s hints for tournament distribution.', hint_type)
                 if fill_hint_types:
                     current_fill_type = fill_hint_types.pop(0)
@@ -657,7 +665,7 @@ def buildWorldGossipHints(spoiler, world, checkedLocations=None):
             place_ok = add_hint(spoiler, world, stoneIDs, gossip_text, hint_dist[hint_type][1], location)
             if place_ok:
                 hint_counts[hint_type] = hint_counts.get(hint_type, 0) + 1
-            if not place_ok and world.hint_dist == "tournament":
+            if not place_ok and world.hint_dist in ("tournament", "tournament-no-woth-barren"):
                 logging.getLogger('').debug('Failed to place %s hint for %s.', hint_type, location.name)
                 fixed_hint_types.insert(0, hint_type)
 

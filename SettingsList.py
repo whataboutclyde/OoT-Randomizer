@@ -2450,11 +2450,12 @@ setting_infos = [
         gui_text       = 'Hint Distribution',
         default        = 'balanced',
         choices        = {
-            'useless':     'Useless',
-            'balanced':    'Balanced',
-            'strong':      'Strong',
-            'very_strong': 'Very Strong',
-            'tournament':  'Tournament',
+            'useless':                    'Useless',
+            'balanced':                   'Balanced',
+            'strong':                     'Strong',
+            'very_strong':                'Very Strong',
+            'tournament':                 'Tournament',
+            'tournament-no-woth-barren':  'Tournament (No WoTH/Foolish)',
         },
         gui_tooltip    = '''\
             'Useless': Only junk hints.
@@ -2465,9 +2466,14 @@ setting_infos = [
 
             'Very Strong': Many powerful hints.
 
-            'Tournament': Fixed number of hints 
-            for each type, contains duplicates,
-            and only useful hints.
+            'Tournament': Fixed number of hints for each 
+            type, contains duplicates, and only useful hints.
+
+            'Tournament (No WotH/Foolish)': 
+            Same as the 'Tournament' distribution without 
+            "Way of the Hero" and "Foolish Choice" hints, 
+            replaced by triplicates of other hint types and 
+            a single junk hint.
         ''',
         shared         = True,
     ),
