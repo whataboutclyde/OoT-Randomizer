@@ -467,7 +467,9 @@ static void draw_digits(z64_disp_buf_t* db, const int8_t* digits, const tile_pos
     
     for (int i = 0; i < 3; ++i) {
         if (0 <= digits[i] && digits[i] <= 9) {
+            if (digits[i] == 1 && i > 0) --left; // adjust for narrow "1" sprite
             sprite_draw(db, &item_digit_sprite, digits[i], left, top, 8, 8);
+            if (digits[i] == 1) --left; // adjust for narrow "1" sprite
             left += 6;
         }
         else {
