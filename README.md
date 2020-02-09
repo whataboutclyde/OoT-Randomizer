@@ -14,6 +14,7 @@ Differences between this branch and the main Dev branch (on [Testrunner's Fork](
 * Picking up Gold Skulltula Tokens in non-Tokensanity displays a self-closing textbox which no longer freezes the player.
 * "Bombchus In Logic" is improved to include bombchu drops (from grass, pots, etc) that start dropping once you have found Bombchus.
 * New cosmetic option to have all ingame item model colors, as well as drop icons, match cosmetic colors (for hearts, magic and gauntlets).
+* The "Skip First Dampe Race" setting is changed to "Skip First Minigame Phases", which also applies to the Horseback Archery minigame, and allows you to get both rewards at once if you score 1500 points in a single attempt.
 
 ## Index
 
