@@ -1928,6 +1928,21 @@ setting_infos = [
             'randomize_key': 'randomize_settings',
         },
     ),
+    Checkbutton(
+        name           = 'shuffle_medigoron_carpet_salesman',
+        gui_text       = 'Shuffle Medigoron & Carpet Salesman',
+        gui_tooltip    = '''\
+            Enabling this adds a Giant's Knife and a pack of Bombchus 
+            to the item pool and changes both Medigoron and the 
+            Haunted Wasteland Carpet Salesman to sell a random item 
+            once at the price of 200 Rupees.
+        ''',
+        default        = False,
+        shared         = True,
+        gui_params     = {
+            'randomize_key': 'randomize_settings',
+        },
+    ),
     Combobox(
         name           = 'shuffle_interior_entrances',
         gui_text       = 'Shuffle Interior Entrances',

@@ -79,6 +79,8 @@ RANDO_CONTEXT:
 .include "king_zora.asm"
 .include "agony.asm"
 .include "horseback_archery.asm"
+.include "carpet_salesman.asm"
+.include "medigoron.asm"
 .importobj "../build/bundle.o"
 .align 8
 FONT_TEXTURE:
