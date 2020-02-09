@@ -415,14 +415,14 @@ typedef struct {
     uint8_t enable_bosskey;
     uint8_t enable_skulltula;
     uint8_t wallet;
-    int8_t rupee_digits[3];
-    int8_t triforce_digits[3];
-    int8_t skulltula_digits[3];
+    uint8_t rupee_digits[3];
+    uint8_t triforce_digits[3];
+    uint8_t skulltula_digits[3];
 } counter_tile_info_t;
 
 
-void make_digits(int8_t* digits, int16_t value) {
-    digits[0] = digits[1] = digits[2] = -1;
+void make_digits(uint8_t* digits, int16_t value) {
+    digits[0] = digits[1] = digits[2] = 0xFF;
     if (value < 0) {
         return;
     }
@@ -461,12 +461,12 @@ static void populate_counts(const z64_file_t* file, counter_tile_info_t* counts)
 
 
 // note: must load item_digit_sprite before calling this function
-static void draw_digits(z64_disp_buf_t* db, const int8_t* digits, const tile_position* pos, int voffset) {
+static void draw_digits(z64_disp_buf_t* db, const uint8_t* digits, const tile_position* pos, int voffset) {
     int left = pos->left + LEFT_OFFSET - 3;
     int top = pos->top + voffset;
     
     for (int i = 0; i < 3; ++i) {
-        if (0 <= digits[i] && digits[i] <= 9) {
+        if (digits[i] <= 9) {
             if (digits[i] == 1 && i > 0) --left; // adjust for narrow "1" sprite
             sprite_draw(db, &item_digit_sprite, digits[i], left, top, 8, 8);
             if (digits[i] == 1) --left; // adjust for narrow "1" sprite

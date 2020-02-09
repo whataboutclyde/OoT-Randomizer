@@ -86,9 +86,9 @@
     "dungeon_count": "034891B0",
     "dungeons": "03487FC0",
     "extern_ctxt": "0348805C",
-    "fixed_tile_positions": "03487E7C",
+    "fixed_tile_positions": "03487E78",
     "font_sprite": "03488168",
-    "freecam_modes": "03487E10",
+    "freecam_modes": "03487E0C",
     "hash_sprites": "034891CC",
     "hash_symbols": "034880AC",
     "heap_next": "0348925C",
@@ -107,7 +107,7 @@
     "pending_freezes": "03489240",
     "pending_item_queue": "03489298",
     "quest_items_sprite": "03488178",
-    "rupee_colors": "03487F1C",
+    "rupee_colors": "03487F18",
     "satisified_pending_frames": "03489210",
     "scene_fog_distance": "034891B8",
     "setup_db": "034880F0",
@@ -117,5 +117,5 @@
     "triforce_hunt_enabled": "03489250",
     "triforce_pieces_requied": "034891F2",
     "triforce_sprite": "03488148",
-    "variable_tile_positions": "03487E64"
+    "variable_tile_positions": "03487E60"
 }
