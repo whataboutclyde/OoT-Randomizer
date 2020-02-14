@@ -50,7 +50,7 @@ def build_one_way_targets(world, types_to_include, exclude=[]):
     one_way_entrances = []
     for pool_type in types_to_include:
         one_way_entrances += world.get_shufflable_entrances(type=pool_type)
-    valid_one_way_entrances = list(filter(lambda entrance: entrance.name not in exclude and (entrance.shuffled or entrance.type not in ('OwlDrop', 'WarpSong', 'Spawn')), one_way_entrances))
+    valid_one_way_entrances = list(filter(lambda entrance: entrance.name not in exclude, one_way_entrances))
     return [entrance.get_new_target() for entrance in valid_one_way_entrances]
 
 
@@ -306,7 +306,6 @@ entrance_shuffle_table = [
     ('WarpSong',        ('Nocturne of Shadow Warp -> Shadow Temple Warp Region',            { 'index': 0x0568, 'addresses': [0xBF0244] })),
     ('WarpSong',        ('Prelude of Light Warp -> Temple of Time',                         { 'index': 0x05F4, 'addresses': [0xBF0246] })),
 
-    ('Extra',           ('Lost Woods Mushroom Timeout -> Lost Woods',                       { 'index': 0x01AD })),
     ('Extra',           ('Zoras Domain Eyeball Frog Timeout -> Zoras Domain',               { 'index': 0x0153 })),
     ('Extra',           ('Zora River Top of Waterfall -> Zora River',                       { 'index': 0x0199 })),
 ]
