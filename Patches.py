@@ -874,6 +874,10 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
         #door.
         rom.write_byte(0x021862E3, 0xC2)
 
+    if world.spawn_positions:
+        # Fix save warping inside Link's House to not be a special case
+        rom.write_int32(0xB06318, 0x00000000)
+
     # Set entrances to update, except grotto entrances which are handled on their own at a later point
     set_entrance_updates(filter(lambda entrance: entrance.type != 'Grotto', world.get_shuffled_entrances()))
 

@@ -296,7 +296,7 @@ entrance_shuffle_table = [
     ('OwlDrop',         ('Lake Hylia Owl Flight -> Hyrule Field',                           { 'index': 0x027E, 'addresses': [0xAC9F26] })),
     ('OwlDrop',         ('Death Mountain Owl Flight -> Kakariko Impa Ledge',                { 'index': 0x0554, 'addresses': [0xAC9EF2] })),
 
-    ('Spawn',           ('Child Spawn -> Links House',                                      { 'index': 0x00BB, 'addresses': [0xB0631E, 0xB06342] })),
+    ('Spawn',           ('Child Spawn -> Links House',                                      { 'index': 0x00BB, 'addresses': [0xB06342] })),
     ('Spawn',           ('Adult Spawn -> Temple of Time',                                   { 'index': 0x05F4, 'addresses': [0xB06332] })),
 
     ('WarpSong',        ('Minuet of Forest Warp -> Sacred Forest Meadow',                   { 'index': 0x0600, 'addresses': [0xBF023C] })),
