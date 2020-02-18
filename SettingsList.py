@@ -2009,10 +2009,10 @@ setting_infos = [
             Shuffle the pool of Overworld entrances, which corresponds
             to almost all loading zones between Overworld areas.
 
-            Some entrances are kept vanilla to avoid issues:
+            Some entrances are kept unshuffled to avoid issues:
             - Hyrule Castle Courtyard and Garden entrances
-            - Gerudo Valley to Lake Hylia by the stream
             - Both Market Back Alley entrances
+            - Gerudo Valley to Lake Hylia (unless entrances are decoupled)
 
             Just like when shuffling interior entrances, shuffling overworld 
             entrances disables trade timers and trade items never revert, 
