@@ -164,6 +164,9 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
                      world.distribution.song_as_items or \
                      world.starting_songs
 
+    if songs_as_items:
+        rom.write_byte(rom.sym('SONGS_AS_ITEMS'), 1)
+
     # Speed learning Zelda's Lullaby
     rom.write_int32s(0x02E8E90C, [0x000003E8, 0x00000001]) # Terminator Execution
     if songs_as_items:
@@ -417,6 +420,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
     rom.write_byte(0x2F5B559, 0x04)
     rom.write_byte(0x2F5B621, 0x04)
     rom.write_byte(0x2F5B761, 0x07)
+    rom.write_bytes(0x2F5B840, [0x00, 0x05, 0x00, 0x01, 0x00, 0x05, 0x00, 0x05]) #shorten white flash
 
     # Speed scene with all medallions
     rom.write_bytes(0x2512680, [0x00, 0x74, 0x00, 0x01, 0x00, 0x02, 0x00, 0x02])
@@ -902,7 +906,6 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
     save_context = SaveContext()
 
     # Initial Save Data
-
     if not world.useful_cutscenes:
         save_context.write_bits(0x00D4 + 0x03 * 0x1C + 0x04 + 0x0, 0x08) # Forest Temple switch flag (Poe Sisters cutscene)
     save_context.write_bits(0x00D4 + 0x05 * 0x1C + 0x04 + 0x1, 0x01) # Water temple switch flag (Ruto)
@@ -945,8 +948,7 @@ def patch_rom(spoiler:Spoiler, world:World, rom:Rom):
     save_context.write_bits(0x0EE2, 0x01) # "Began Ganondorf Battle"
     save_context.write_bits(0x0EE3, 0x80) # "Began Bongo Bongo Battle"
     save_context.write_bits(0x0EE3, 0x40) # "Began Barinade Battle"
-    if not world.useful_cutscenes:
-        save_context.write_bits(0x0EE3, 0x20) # "Began Twinrova Battle"
+    save_context.write_bits(0x0EE3, 0x20) # "Began Twinrova Battle"
     save_context.write_bits(0x0EE3, 0x10) # "Began Morpha Battle"
     save_context.write_bits(0x0EE3, 0x08) # "Began Volvagia Battle"
     save_context.write_bits(0x0EE3, 0x04) # "Began Phantom Ganon Battle"
