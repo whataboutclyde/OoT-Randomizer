@@ -108,6 +108,8 @@ TRIFORCE_ICON_TEXTURE:
 PAYLOAD_END:
 .endarea //payload max memory
 
+.skip 0x100 ; Temporary address bump to avoid audio issues
+
 AUDIO_THREAD_MEM_START:
 .skip AUDIO_THREAD_MEM_SIZE
 .close

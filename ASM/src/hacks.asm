@@ -2057,3 +2057,12 @@ skip_GS_BGS_text:
 ;Replaces: jal      0x8006FB50
 .orga 0xAE4B30
     jal    minigames_restore_b
+
+;==================================================================================================
+; Jabu Spiritual Stone Actor Override
+;==================================================================================================
+; Replaces: addiu   t8, zero, 0x0006
+;           sh      t8, 0x017C(a0)
+.orga 0xCC8594
+    jal     demo_effect_medal_init
+    addiu   t8, zero, 0x0006
