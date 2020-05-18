@@ -238,10 +238,6 @@ adaa78,0
 adaba8,0
 adabcc,0
 adabe4,0
-ae4360,0
-ae43b0,c100d5b
-ae4b30,c100d67
-ae4bd8,c100d67
 ae5764,810062a
 ae5768,0
 ae59e0,8100646
