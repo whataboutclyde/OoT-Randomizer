@@ -120,13 +120,6 @@ item_difficulty_max = {
     },
 }
 
-TriforceCounts = {
-    'plentiful': 2.00,
-    'balanced':  1.50,
-    'scarce':    1.25,
-    'minimal':   1.00,
-}
-
 DT_vanilla = (
     ['Recovery Heart'] * 2)
 
@@ -1262,7 +1255,7 @@ def get_pool_core(world):
         world.state.collect(ItemFactory('Small Key (Water Temple)'))
 
     if world.triforce_hunt:
-        triforce_count = int(round(world.triforce_goal_per_world * TriforceCounts[world.item_pool_value]))
+        triforce_count = int(world.triforce_goal_per_world + world.triforce_extra_per_world)
         pending_junk_pool.extend(['Triforce Piece'] * triforce_count)
 
     if world.shuffle_ganon_bosskey in ['lacs_vanilla', 'lacs_medallions', 'lacs_stones', 'lacs_dungeons']:

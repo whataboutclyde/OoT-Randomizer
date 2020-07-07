@@ -1713,11 +1713,32 @@ setting_infos = [
             For example, if this is set to 20 in a 2 player multiworld, players 
             need 40 total, but one player could obtain 30 and the other 10. 
 
-            Extra pieces are determined by the the Item Pool setting:
-            'Plentiful': 100% Extra
-            'Balanced': 50% Extra
-            'Scarce': 25% Extra
-            'Minimal: No Extra
+            Note that if there are too many total triforce pieces and the item
+            pool is plentiful, the seed may fail to generate.
+        ''',
+        gui_params     = {
+            "hide_when_disabled": True,
+        },
+    ),
+    Scale(
+        name           = 'triforce_extra_per_world',
+        gui_text       = 'Extra Triforces Per World',
+        default        = 10,
+        min            = 0,
+        max            = 100,
+        shared         = True,
+        gui_tooltip    = '''\
+            Select the amount of extra Triforce Pieces in the world.
+
+            In multiworld, each world will have the same number of triforces 
+            in them. The required amount will be per world collectively. 
+            For example, if this is set to 20 and there are 20 required to 
+            beat the game in a 2 player multiworld, both worlds will contain
+            40 pieces, the players collectively need 40 total, but one player 
+            could obtain 40 and the other 0. 
+
+            Note that if there are too many total triforce pieces and the item
+            pool is plentiful, the seed may fail to generate.
         ''',
         gui_params     = {
             "hide_when_disabled": True,
